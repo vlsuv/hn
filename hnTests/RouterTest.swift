@@ -9,11 +9,24 @@
 import XCTest
 @testable import hn
 
+class MockNavigationController: UINavigationController {
+    var presentedVC: UIViewController?
+    
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        self.presentedVC = viewController
+        super.pushViewController(viewController, animated: animated)
+    }
+}
+
 class RouterTest: XCTestCase {
     
+    var navigationController: MockNavigationController!
     var router: RouterProtocol!
+    var assemblyModuleBuilder: AssemblyModuleBuilderProtocol!
 
     override func setUpWithError() throws {
+        navigationController = MockNavigationController()
+        assemblyModuleBuilder = AssemblyModuleBuilder()
     }
 
     override func tearDownWithError() throws {
@@ -21,11 +34,16 @@ class RouterTest: XCTestCase {
     }
     
     func testInitialViewController() {
-        let navigationController = UINavigationController()
-        let assemblyModuleBuilder = AssemblyModuleBuilder()
         router = Router(navigationController: navigationController, assemblyBuilder: assemblyModuleBuilder)
         router.initialViewController()
         
         XCTAssertTrue(navigationController.viewControllers[0] is StoryListViewController)
+    }
+    
+    func testShowStoryDetailViewController() {
+        router = Router(navigationController: navigationController, assemblyBuilder: assemblyModuleBuilder)
+        router.showDetail(withStory: nil)
+        
+        XCTAssertTrue(navigationController.presentedVC is DetailStoryViewController)
     }
 }

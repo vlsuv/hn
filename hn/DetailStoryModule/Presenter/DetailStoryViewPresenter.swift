@@ -13,7 +13,7 @@ protocol DetailStoryViewProtocol: class {
 }
 
 protocol DetailStoryViewPresenterProtocol {
-    init(view: DetailStoryViewProtocol, router: RouterProtocol, story: Story)
+    init(view: DetailStoryViewProtocol, router: RouterProtocol, story: Story?)
     func loadWebView()
 }
 
@@ -22,7 +22,7 @@ class DetailStoryViewPresenter: DetailStoryViewPresenterProtocol {
     var router: RouterProtocol!
     var story: Story?
     
-    required init(view: DetailStoryViewProtocol, router: RouterProtocol, story: Story) {
+    required init(view: DetailStoryViewProtocol, router: RouterProtocol, story: Story?) {
         self.view = view
         self.router = router
         self.story = story

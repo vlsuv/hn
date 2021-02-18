@@ -15,7 +15,7 @@ protocol BaseRouterProtocol {
 
 protocol RouterProtocol: BaseRouterProtocol {
     func initialViewController()
-    func showDetail(withStory story: Story)
+    func showDetail(withStory story: Story?)
 }
 
 final class Router: RouterProtocol {
@@ -34,7 +34,7 @@ final class Router: RouterProtocol {
         }
     }
     
-    func showDetail(withStory story: Story) {
+    func showDetail(withStory story: Story?) {
         guard let navigationController = navigationController else { return }
         if let detailStoryViewController = assemblyBuilder?.createDetailStoryViewController(router: self, story: story) {
             navigationController.pushViewController(detailStoryViewController, animated: true)

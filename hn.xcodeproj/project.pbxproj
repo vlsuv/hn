@@ -28,6 +28,7 @@
 		67B6F19525DE9053006FE143 /* DetailStoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67B6F19325DE9052006FE143 /* DetailStoryViewController.xib */; };
 		67B6F19725DE9356006FE143 /* DetailStoryViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19625DE9356006FE143 /* DetailStoryViewPresenter.swift */; };
 		67B6F19A25DEB3B2006FE143 /* UIView extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19925DEB3B2006FE143 /* UIView extensions.swift */; };
+		67B6F19F25DEBA36006FE143 /* StoryDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		67B6F19325DE9052006FE143 /* DetailStoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailStoryViewController.xib; sourceTree = "<group>"; };
 		67B6F19625DE9356006FE143 /* DetailStoryViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryViewPresenter.swift; sourceTree = "<group>"; };
 		67B6F19925DEB3B2006FE143 /* UIView extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView extensions.swift"; sourceTree = "<group>"; };
+		67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailPresenterTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			children = (
 				67B6F18A25DE7E95006FE143 /* RouterTest.swift */,
 				67B6F18725DE739F006FE143 /* TestStoryListModule */,
+				67B6F19B25DEB9E1006FE143 /* TestStoryDetailModule */,
 				672A623A25DA82F6009EF6A3 /* hnTests.swift */,
 				672A623C25DA82F6009EF6A3 /* Info.plist */,
 			);
@@ -253,6 +256,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		67B6F19B25DEB9E1006FE143 /* TestStoryDetailModule */ = {
+			isa = PBXGroup;
+			children = (
+				67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */,
+			);
+			path = TestStoryDetailModule;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -377,6 +388,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67B6F18925DE73D2006FE143 /* StoryListPresenterTest.swift in Sources */,
+				67B6F19F25DEBA36006FE143 /* StoryDetailPresenterTest.swift in Sources */,
 				67B6F18B25DE7E95006FE143 /* RouterTest.swift in Sources */,
 				672A623B25DA82F6009EF6A3 /* hnTests.swift in Sources */,
 			);
