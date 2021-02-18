@@ -23,6 +23,7 @@
 		672A625D25DAA5E6009EF6A3 /* AssemblyModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A625C25DAA5E6009EF6A3 /* AssemblyModuleBuilder.swift */; };
 		672A625F25DAA91F009EF6A3 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A625E25DAA91F009EF6A3 /* Router.swift */; };
 		67B6F18925DE73D2006FE143 /* StoryListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F18825DE73D2006FE143 /* StoryListPresenterTest.swift */; };
+		67B6F18B25DE7E95006FE143 /* RouterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F18A25DE7E95006FE143 /* RouterTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		672A625C25DAA5E6009EF6A3 /* AssemblyModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModuleBuilder.swift; sourceTree = "<group>"; };
 		672A625E25DAA91F009EF6A3 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		67B6F18825DE73D2006FE143 /* StoryListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListPresenterTest.swift; sourceTree = "<group>"; };
+		67B6F18A25DE7E95006FE143 /* RouterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 		672A623925DA82F6009EF6A3 /* hnTests */ = {
 			isa = PBXGroup;
 			children = (
+				67B6F18A25DE7E95006FE143 /* RouterTest.swift */,
 				67B6F18725DE739F006FE143 /* TestStoryListModule */,
 				672A623A25DA82F6009EF6A3 /* hnTests.swift */,
 				672A623C25DA82F6009EF6A3 /* Info.plist */,
@@ -326,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67B6F18925DE73D2006FE143 /* StoryListPresenterTest.swift in Sources */,
+				67B6F18B25DE7E95006FE143 /* RouterTest.swift in Sources */,
 				672A623B25DA82F6009EF6A3 /* hnTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
