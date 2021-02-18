@@ -24,6 +24,10 @@
 		672A625F25DAA91F009EF6A3 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A625E25DAA91F009EF6A3 /* Router.swift */; };
 		67B6F18925DE73D2006FE143 /* StoryListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F18825DE73D2006FE143 /* StoryListPresenterTest.swift */; };
 		67B6F18B25DE7E95006FE143 /* RouterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F18A25DE7E95006FE143 /* RouterTest.swift */; };
+		67B6F19425DE9052006FE143 /* DetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19225DE9052006FE143 /* DetailStoryViewController.swift */; };
+		67B6F19525DE9053006FE143 /* DetailStoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67B6F19325DE9052006FE143 /* DetailStoryViewController.xib */; };
+		67B6F19725DE9356006FE143 /* DetailStoryViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19625DE9356006FE143 /* DetailStoryViewPresenter.swift */; };
+		67B6F19A25DEB3B2006FE143 /* UIView extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19925DEB3B2006FE143 /* UIView extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +62,10 @@
 		672A625E25DAA91F009EF6A3 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		67B6F18825DE73D2006FE143 /* StoryListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListPresenterTest.swift; sourceTree = "<group>"; };
 		67B6F18A25DE7E95006FE143 /* RouterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTest.swift; sourceTree = "<group>"; };
+		67B6F19225DE9052006FE143 /* DetailStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryViewController.swift; sourceTree = "<group>"; };
+		67B6F19325DE9052006FE143 /* DetailStoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailStoryViewController.xib; sourceTree = "<group>"; };
+		67B6F19625DE9356006FE143 /* DetailStoryViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryViewPresenter.swift; sourceTree = "<group>"; };
+		67B6F19925DEB3B2006FE143 /* UIView extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +114,7 @@
 				672A625E25DAA91F009EF6A3 /* Router.swift */,
 				672A625C25DAA5E6009EF6A3 /* AssemblyModuleBuilder.swift */,
 				672A624725DA8467009EF6A3 /* StoryListModule */,
+				67B6F18F25DE9003006FE143 /* DetailStoryModule */,
 				672A625225DA8A85009EF6A3 /* ServicesLayer */,
 				672A625625DA9D16009EF6A3 /* Utils */,
 				672A624825DA8484009EF6A3 /* Resources */,
@@ -188,6 +197,7 @@
 		672A625625DA9D16009EF6A3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				67B6F19825DEB392006FE143 /* Extensions */,
 				672A625725DA9D2D009EF6A3 /* Managers */,
 			);
 			path = Utils;
@@ -207,6 +217,40 @@
 				67B6F18825DE73D2006FE143 /* StoryListPresenterTest.swift */,
 			);
 			path = TestStoryListModule;
+			sourceTree = "<group>";
+		};
+		67B6F18F25DE9003006FE143 /* DetailStoryModule */ = {
+			isa = PBXGroup;
+			children = (
+				67B6F19025DE9026006FE143 /* View */,
+				67B6F19125DE902C006FE143 /* Presenter */,
+			);
+			path = DetailStoryModule;
+			sourceTree = "<group>";
+		};
+		67B6F19025DE9026006FE143 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				67B6F19225DE9052006FE143 /* DetailStoryViewController.swift */,
+				67B6F19325DE9052006FE143 /* DetailStoryViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		67B6F19125DE902C006FE143 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				67B6F19625DE9356006FE143 /* DetailStoryViewPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		67B6F19825DEB392006FE143 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				67B6F19925DEB3B2006FE143 /* UIView extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +337,7 @@
 				672A624D25DA8657009EF6A3 /* StoryListViewController.xib in Resources */,
 				672A624625DA8320009EF6A3 /* .gitignore in Resources */,
 				672A623025DA82F5009EF6A3 /* LaunchScreen.storyboard in Resources */,
+				67B6F19525DE9053006FE143 /* DetailStoryViewController.xib in Resources */,
 				672A622D25DA82F5009EF6A3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,11 +356,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67B6F19725DE9356006FE143 /* DetailStoryViewPresenter.swift in Sources */,
+				67B6F19A25DEB3B2006FE143 /* UIView extensions.swift in Sources */,
 				672A622825DA82E7009EF6A3 /* StoryListViewController.swift in Sources */,
 				672A622425DA82E7009EF6A3 /* AppDelegate.swift in Sources */,
 				672A625F25DAA91F009EF6A3 /* Router.swift in Sources */,
 				672A625D25DAA5E6009EF6A3 /* AssemblyModuleBuilder.swift in Sources */,
 				672A625B25DAA099009EF6A3 /* StoriesNetworkService.swift in Sources */,
+				67B6F19425DE9052006FE143 /* DetailStoryViewController.swift in Sources */,
 				672A625925DA9D45009EF6A3 /* ErrorManager.swift in Sources */,
 				672A625125DA89E7009EF6A3 /* StoryListViewPresenter.swift in Sources */,
 				672A622625DA82E7009EF6A3 /* SceneDelegate.swift in Sources */,

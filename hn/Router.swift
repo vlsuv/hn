@@ -15,10 +15,10 @@ protocol BaseRouterProtocol {
 
 protocol RouterProtocol: BaseRouterProtocol {
     func initialViewController()
+    func showDetail(withStory story: Story)
 }
 
 final class Router: RouterProtocol {
-    
     var navigationController: UINavigationController?
     var assemblyBuilder: AssemblyModuleBuilderProtocol?
     
@@ -31,6 +31,13 @@ final class Router: RouterProtocol {
         guard let navigationController = navigationController else { return }
         if let storyListViewController = assemblyBuilder?.createStoryListViewController(router: self) {
             navigationController.viewControllers = [storyListViewController]
+        }
+    }
+    
+    func showDetail(withStory story: Story) {
+        guard let navigationController = navigationController else { return }
+        if let detailStoryViewController = assemblyBuilder?.createDetailStoryViewController(router: self, story: story) {
+            navigationController.pushViewController(detailStoryViewController, animated: true)
         }
     }
 }

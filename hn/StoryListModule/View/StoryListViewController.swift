@@ -55,6 +55,9 @@ extension StoryListViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension StoryListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let story = presenter.stories?[indexPath.row] else { return }
+        presenter.showDetail(withStory: story)
+    }
 }
 

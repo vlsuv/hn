@@ -10,6 +10,7 @@ import UIKit
 
 protocol AssemblyModuleBuilderProtocol {
     func createStoryListViewController(router: RouterProtocol) -> UIViewController
+    func createDetailStoryViewController(router: RouterProtocol, story: Story) -> UIViewController
 }
 
 final class AssemblyModuleBuilder: AssemblyModuleBuilderProtocol {
@@ -17,6 +18,13 @@ final class AssemblyModuleBuilder: AssemblyModuleBuilderProtocol {
         let view = StoryListViewController()
         let storiesNetworkService = StoriesNetworkService()
         let presenter = StoryListViewPresenter(view: view, router: router, storiesNetworkService: storiesNetworkService)
+        view.presenter = presenter
+        return view
+    }
+    
+    func createDetailStoryViewController(router: RouterProtocol, story: Story) -> UIViewController {
+        let view = DetailStoryViewController()
+        let presenter = DetailStoryViewPresenter(view: view, router: router, story: story)
         view.presenter = presenter
         return view
     }

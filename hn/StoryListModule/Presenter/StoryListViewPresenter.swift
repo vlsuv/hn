@@ -17,6 +17,7 @@ protocol StoryListViewPresenterProtocol: class {
     init(view: StoryListViewProtocol, router: RouterProtocol, storiesNetworkService: StoriesNetworkServiceProtocol)
     var stories: [Story]? { get set }
     func fetchStories()
+    func showDetail(withStory story: Story)
 }
 
 class StoryListViewPresenter: StoryListViewPresenterProtocol {
@@ -46,5 +47,9 @@ class StoryListViewPresenter: StoryListViewPresenterProtocol {
                 }
             }
         }
+    }
+    
+    func showDetail(withStory story: Story) {
+        router.showDetail(withStory: story)
     }
 }
