@@ -13,26 +13,33 @@ class StoryListViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var tableView: UITableView!
     var presenter: StoryListViewPresenterProtocol!
+    private let loadingActivityIndicator = UIActivityIndicatorView()
     
     // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        presenter.fetchStories()
     }
     
     // MARK: - Handlers
     private func configureTableView() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.tableFooterView = loadingActivityIndicator
+        tableView.tableFooterView?.frame.size.height = tableView.rowHeight
+    }
+    
+    private func configureLoadingActivityIndicator() {
+        loadingActivityIndicator.color = .black
+        loadingActivityIndicator.startAnimating()
     }
 }
 
 // MARK: - StoryListViewProtocol
 extension StoryListViewController: StoryListViewProtocol {
     func Succes() {
+        toogleActivityIndicatorStatus(activityIndicator: loadingActivityIndicator, isOn: false)
         tableView.reloadData()
     }
-    
     func Failure(withError error: Error) {
         print(error)
     }
@@ -59,5 +66,16 @@ extension StoryListViewController: UITableViewDelegate {
         guard let story = presenter.stories?[indexPath.row] else { return }
         presenter.showDetail(withStory: story)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height {
+            if !presenter.isLoading {
+                toogleActivityIndicatorStatus(activityIndicator: loadingActivityIndicator, isOn: true)
+                presenter.fetchStories()
+            }
+        }
+    }
 }
-

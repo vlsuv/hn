@@ -10,7 +10,7 @@ import UIKit
 
 protocol StoriesNetworkServiceProtocol: NetworkServiceProtocol {
     init(sessionConfiguration: URLSessionConfiguration)
-    func fetchStories(withEndpoint endpoint: Endpoint, completionHandler: @escaping (NetworkServiceResult<[Story]>) -> ())
+    func fetchStories(withEndpoint endpoint: Endpoint, length: Int, completionHandler: @escaping (NetworkServiceResult<[Story]>) -> ())
 }
 
 enum Endpoint {
@@ -45,7 +45,7 @@ final class StoriesNetworkService: StoriesNetworkServiceProtocol {
         self.init(sessionConfiguration: URLSessionConfiguration.default)
     }
     
-    func fetchStoryIDs(from endpoint: Endpoint, completionHandler: @escaping ([Int]?, Error?) -> ()) {
+    func fetchStoryIDs(from endpoint: Endpoint, length: Int, completionHandler: @escaping ([Int]?, Error?) -> ()) {
         fetch(request: endpoint.request, parse: { (data) -> ([Int])? in
             if let storyIDs = try? JSONDecoder().decode([Int].self, from: data) {
                 return storyIDs
@@ -55,7 +55,7 @@ final class StoriesNetworkService: StoriesNetworkServiceProtocol {
         }) { (networkServiceResult) in
             switch networkServiceResult {
             case .Succes(let storyIDs):
-                let storyIDs = Array(storyIDs.prefix(20))
+                let storyIDs = Array(storyIDs.prefix(length))
                 completionHandler(storyIDs, nil)
             case .Failure(let error):
                 completionHandler(nil, error)
@@ -82,8 +82,8 @@ final class StoriesNetworkService: StoriesNetworkServiceProtocol {
         }
     }
     
-    func fetchStories(withEndpoint endpoint: Endpoint, completionHandler: @escaping (NetworkServiceResult<[Story]>) -> ()) {
-        fetchStoryIDs(from: endpoint) { (storyIDs, error) in
+    func fetchStories(withEndpoint endpoint: Endpoint, length: Int, completionHandler: @escaping (NetworkServiceResult<[Story]>) -> ()) {
+        fetchStoryIDs(from: endpoint, length: length) { (storyIDs, error) in
             guard let storyIDs = storyIDs else {
                 if let error = error {
                     completionHandler(.Failure(error))

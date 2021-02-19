@@ -18,6 +18,7 @@ protocol StoryListViewPresenterProtocol: class {
     var stories: [Story]? { get set }
     func fetchStories()
     func showDetail(withStory story: Story)
+    var isLoading: Bool { get set }
 }
 
 class StoryListViewPresenter: StoryListViewPresenterProtocol {
@@ -26,6 +27,7 @@ class StoryListViewPresenter: StoryListViewPresenterProtocol {
     var router: RouterProtocol!
     let storiesNetworkService: StoriesNetworkServiceProtocol!
     var stories: [Story]?
+    var isLoading: Bool = false
     
     required init(view: StoryListViewProtocol, router: RouterProtocol, storiesNetworkService: StoriesNetworkServiceProtocol) {
         self.view = view
@@ -34,7 +36,9 @@ class StoryListViewPresenter: StoryListViewPresenterProtocol {
     }
     
     func fetchStories() {
-        storiesNetworkService?.fetchStories(withEndpoint: .topstories) { [weak self] networkServiceResult in
+        isLoading = true
+        
+        storiesNetworkService?.fetchStories(withEndpoint: .topstories, length: (stories?.count ?? 0) + 20) { [weak self] networkServiceResult in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
@@ -45,6 +49,7 @@ class StoryListViewPresenter: StoryListViewPresenterProtocol {
                 case .Failure(let error):
                     self.view?.Failure(withError: error)
                 }
+                self.isLoading = false
             }
         }
     }
