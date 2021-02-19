@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoryListViewController" customModule="hn" customModuleProvider="target">
             <connections>
+                <outlet property="segmentedControl" destination="nUq-aM-fw0" id="n02-JE-1mZ"/>
                 <outlet property="tableView" destination="3sS-Dw-2iW" id="fF1-jD-FDr"/>
                 <outlet property="view" destination="iN0-l3-epB" id="6eI-qL-CtI"/>
             </connections>
@@ -19,18 +20,28 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3sS-Dw-2iW">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <rect key="frame" x="0.0" y="75" width="414" height="821"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="0xN-gl-cfH"/>
                         <outlet property="delegate" destination="-1" id="A5M-c8-0DF"/>
                     </connections>
                 </tableView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="nUq-aM-fw0">
+                    <rect key="frame" x="0.0" y="44" width="414" height="32"/>
+                    <segments>
+                        <segment title="Top"/>
+                        <segment title="New"/>
+                    </segments>
+                </segmentedControl>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="3sS-Dw-2iW" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="CR4-3P-riB"/>
-                <constraint firstItem="3sS-Dw-2iW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="m80-oz-wcF"/>
+                <constraint firstItem="3sS-Dw-2iW" firstAttribute="top" secondItem="nUq-aM-fw0" secondAttribute="bottom" id="HBd-lh-gVk"/>
+                <constraint firstItem="nUq-aM-fw0" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="HI7-ZP-RMs"/>
+                <constraint firstItem="nUq-aM-fw0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="d8y-Z3-nZn"/>
+                <constraint firstItem="nUq-aM-fw0" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="lcA-Fh-VdV"/>
                 <constraint firstAttribute="bottom" secondItem="3sS-Dw-2iW" secondAttribute="bottom" id="qk1-ui-aqR"/>
                 <constraint firstItem="3sS-Dw-2iW" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="vg1-zR-IxU"/>
             </constraints>

@@ -19,6 +19,8 @@ protocol StoryListViewPresenterProtocol: class {
     func fetchStories()
     func showDetail(withStory story: Story)
     var isLoading: Bool { get set }
+    var storiesSegmentedIndex: Int { get set }
+    func setStoriesSegmentedIndex(index: Int)
 }
 
 class StoryListViewPresenter: StoryListViewPresenterProtocol {
@@ -28,6 +30,7 @@ class StoryListViewPresenter: StoryListViewPresenterProtocol {
     let storiesNetworkService: StoriesNetworkServiceProtocol!
     var stories: [Story]?
     var isLoading: Bool = false
+    var storiesSegmentedIndex: Int = 0
     
     required init(view: StoryListViewProtocol, router: RouterProtocol, storiesNetworkService: StoriesNetworkServiceProtocol) {
         self.view = view
@@ -36,9 +39,13 @@ class StoryListViewPresenter: StoryListViewPresenterProtocol {
     }
     
     func fetchStories() {
+        guard let endpoint = Endpoint(index: self.storiesSegmentedIndex) else {
+            view?.Failure(withError: ErrorManager.StorySegmentError)
+            return
+        }
         isLoading = true
         
-        storiesNetworkService?.fetchStories(withEndpoint: .topstories, length: (stories?.count ?? 0) + 20) { [weak self] networkServiceResult in
+        storiesNetworkService?.fetchStories(withEndpoint: endpoint, length: (stories?.count ?? 0) + 20) { [weak self] networkServiceResult in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
@@ -56,5 +63,11 @@ class StoryListViewPresenter: StoryListViewPresenterProtocol {
     
     func showDetail(withStory story: Story) {
         router.showDetail(withStory: story)
+    }
+    
+    func setStoriesSegmentedIndex(index: Int) {
+        self.storiesSegmentedIndex = index
+        self.stories = nil
+        self.fetchStories()
     }
 }

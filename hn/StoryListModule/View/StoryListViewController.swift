@@ -12,13 +12,23 @@ class StoryListViewController: UIViewController {
     
     // MARK: - Properties
     @IBOutlet weak var tableView: UITableView!
-    var presenter: StoryListViewPresenterProtocol!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     private let loadingActivityIndicator = UIActivityIndicatorView()
+    var presenter: StoryListViewPresenterProtocol!
     
     // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        configureLoadingActivityIndicator()
+        configureSegmentedControl()
+    }
+    
+    // MARK: - Actions
+    @objc private func didChangeSegmentedControlValue(_ sender: UISegmentedControl) {
+        presenter.setStoriesSegmentedIndex(index: sender.selectedSegmentIndex)
+        tableView.reloadData()
+        toogleActivityIndicatorStatus(activityIndicator: loadingActivityIndicator, isOn: true)
     }
     
     // MARK: - Handlers
@@ -30,7 +40,10 @@ class StoryListViewController: UIViewController {
     
     private func configureLoadingActivityIndicator() {
         loadingActivityIndicator.color = .black
-        loadingActivityIndicator.startAnimating()
+    }
+    
+    private func configureSegmentedControl() {
+        segmentedControl.addTarget(self, action: #selector(didChangeSegmentedControlValue(_:)), for: .valueChanged)
     }
 }
 
@@ -41,6 +54,7 @@ extension StoryListViewController: StoryListViewProtocol {
         tableView.reloadData()
     }
     func Failure(withError error: Error) {
+        toogleActivityIndicatorStatus(activityIndicator: loadingActivityIndicator, isOn: false)
         print(error)
     }
 }

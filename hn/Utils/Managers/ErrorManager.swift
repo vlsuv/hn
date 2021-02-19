@@ -12,4 +12,5 @@ enum ErrorManager: Error {
     case MissingHTTPResponce
     case DataParseError
     case StatusCodeError(Int)
+    case StorySegmentError
 }
