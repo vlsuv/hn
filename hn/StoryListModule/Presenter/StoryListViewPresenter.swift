@@ -21,6 +21,7 @@ protocol StoryListViewPresenterProtocol: class {
     var isLoading: Bool { get set }
     var storiesSegmentedIndex: Int { get set }
     func setStoriesSegmentedIndex(index: Int)
+    func refreshStories()
 }
 
 class StoryListViewPresenter: StoryListViewPresenterProtocol {
@@ -67,6 +68,11 @@ class StoryListViewPresenter: StoryListViewPresenterProtocol {
     
     func setStoriesSegmentedIndex(index: Int) {
         self.storiesSegmentedIndex = index
+        self.stories = nil
+        self.fetchStories()
+    }
+    
+    func refreshStories() {
         self.stories = nil
         self.fetchStories()
     }
