@@ -94,6 +94,7 @@ final class StoriesNetworkService: StoriesNetworkServiceProtocol {
             case .Succes(let story):
                 completionHandler(story, nil)
             case .Failure(let error):
+                print("ParseErrorID: \(id)")
                 completionHandler(nil, error)
             }
         }

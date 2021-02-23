@@ -9,7 +9,8 @@
 import UIKit
 
 protocol DetailStoryViewProtocol: class {
-    func loadWebView(request: URLRequest)
+    func loadWebViewWithRequest(_ request: URLRequest)
+    func loadWebViewWithText(_ text: String)
 }
 
 protocol DetailStoryViewPresenterProtocol {
@@ -29,8 +30,13 @@ class DetailStoryViewPresenter: DetailStoryViewPresenterProtocol {
     }
     
     func loadWebView() {
-        guard let story = story, let url = URL(string: story.url) else { return }
-        let request = URLRequest(url: url)
-        view.loadWebView(request: request)
+        guard let story = story else { return }
+        
+        if let urlString = story.url, let url = URL(string: urlString) {
+            let request = URLRequest(url: url)
+            view.loadWebViewWithRequest(request)
+        }else if let text = story.text {
+            view.loadWebViewWithText(text)
+        }
     }
 }

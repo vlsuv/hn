@@ -17,5 +17,6 @@ struct Story: Decodable {
     let time: TimeInterval
     let title: String
     let type: String
-    let url: String
+    let url: String?
+    let text: String?
 }

@@ -39,8 +39,12 @@ class DetailStoryViewController: UIViewController {
 
 // MARK: - DetailStoryViewPresenterProtocol
 extension DetailStoryViewController: DetailStoryViewProtocol {
-    func loadWebView(request: URLRequest) {
+    func loadWebViewWithRequest(_ request: URLRequest) {
         webView.load(request)
+    }
+    
+    func loadWebViewWithText(_ text: String) {
+        webView.loadHTMLString(text, baseURL: nil)
     }
 }
 
