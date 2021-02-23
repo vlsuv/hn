@@ -19,6 +19,8 @@ class StoryListViewController: UIViewController {
     // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = AssetsColors.background
+        
         configureTableView()
         configureLoadingActivityIndicator()
         configureSegmentedControl()
@@ -39,29 +41,42 @@ class StoryListViewController: UIViewController {
     }
     
     @objc private func didTapThemeButton(_ sender: UIBarButtonItem) {
-        print("did change theme")
+        presenter.changeTheme()
     }
     
     // MARK: - Handlers
     private func configureTableView() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(UINib(nibName: StoryListCell.identifier, bundle: nil), forCellReuseIdentifier: StoryListCell.identifier)
         tableView.tableFooterView = loadingActivityIndicator
         tableView.tableFooterView?.frame.size.height = tableView.rowHeight
+        
+        tableView.rowHeight = 48
+        tableView.separatorStyle = .singleLine
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
     }
     
     private func configureNavigationController() {
-        let refreshAction = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(didTapRefreshButton(_:)))
-        let changeThemeAction = UIBarButtonItem(title: "Theme", style: .plain, target: self, action: #selector(didTapRefreshButton(_:)))
+        let refreshAction = UIBarButtonItem(image: Images.refresh, style: .plain, target: self, action: #selector(didTapRefreshButton(_:)))
+        let changeThemeAction = UIBarButtonItem(image: Images.moon, style: .plain, target: self, action: #selector(didTapThemeButton(_:)))
         navigationItem.rightBarButtonItems = [refreshAction, changeThemeAction]
+        
+        navigationController?.navigationBar.tintColor = AssetsColors.text
+        navigationController?.toTransparent()
     }
     
     private func configureLoadingActivityIndicator() {
         loadingActivityIndicator.hidesWhenStopped = true
-        loadingActivityIndicator.color = .black
+        loadingActivityIndicator.color = AssetsColors.text
     }
     
     private func configureSegmentedControl() {
         segmentedControl.addTarget(self, action: #selector(didChangeSegmentedControlValue(_:)), for: .valueChanged)
+        
+        let normalAttributedString = [
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .light),
+            NSAttributedString.Key.foregroundColor: AssetsColors.text
+        ]
+        segmentedControl.setTitleTextAttributes(normalAttributedString, for: .normal)
     }
 }
 
@@ -69,7 +84,7 @@ class StoryListViewController: UIViewController {
 extension StoryListViewController: StoryListViewProtocol {
     func Succes() {
         loadingActivityIndicator.stopAnimating()
-        tableView.reloadData()
+        tableView.reload()
     }
     func Failure(withError error: Error) {
         loadingActivityIndicator.stopAnimating()
@@ -84,9 +99,9 @@ extension StoryListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryListCell.identifier, for: indexPath) as? StoryListCell else { return UITableViewCell() }
         if let story = presenter.stories?[indexPath.row] {
-            cell.textLabel?.text = "\(story.title)"
+            cell.storyTitleLabel.text = story.title
         }
         return cell
     }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		672923F625E3B6A80029E394 /* UINavigationController extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672923F525E3B6A80029E394 /* UINavigationController extensions.swift */; };
+		672923F825E3BC580029E394 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672923F725E3BC580029E394 /* UserSettings.swift */; };
+		672923FA25E3CA360029E394 /* UITableView extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672923F925E3CA360029E394 /* UITableView extensions.swift */; };
 		672A622425DA82E7009EF6A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A622325DA82E7009EF6A3 /* AppDelegate.swift */; };
 		672A622625DA82E7009EF6A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A622525DA82E7009EF6A3 /* SceneDelegate.swift */; };
 		672A622825DA82E7009EF6A3 /* StoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A622725DA82E7009EF6A3 /* StoryListViewController.swift */; };
@@ -29,6 +32,10 @@
 		67B6F19725DE9356006FE143 /* DetailStoryViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19625DE9356006FE143 /* DetailStoryViewPresenter.swift */; };
 		67B6F19A25DEB3B2006FE143 /* UIView extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19925DEB3B2006FE143 /* UIView extensions.swift */; };
 		67B6F19F25DEBA36006FE143 /* StoryDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */; };
+		67FB0E0B25E1449500009BED /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB0E0A25E1449500009BED /* Images.swift */; };
+		67FB0E0D25E144ED00009BED /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB0E0C25E144ED00009BED /* Colors.swift */; };
+		67FB0E1125E1497700009BED /* StoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB0E0F25E1497700009BED /* StoryListCell.swift */; };
+		67FB0E1225E1497700009BED /* StoryListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67FB0E1025E1497700009BED /* StoryListCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		672923F525E3B6A80029E394 /* UINavigationController extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController extensions.swift"; sourceTree = "<group>"; };
+		672923F725E3BC580029E394 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		672923F925E3CA360029E394 /* UITableView extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView extensions.swift"; sourceTree = "<group>"; };
 		672A622025DA82E6009EF6A3 /* hn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		672A622325DA82E7009EF6A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		672A622525DA82E7009EF6A3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +78,10 @@
 		67B6F19625DE9356006FE143 /* DetailStoryViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryViewPresenter.swift; sourceTree = "<group>"; };
 		67B6F19925DEB3B2006FE143 /* UIView extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView extensions.swift"; sourceTree = "<group>"; };
 		67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailPresenterTest.swift; sourceTree = "<group>"; };
+		67FB0E0A25E1449500009BED /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
+		67FB0E0C25E144ED00009BED /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		67FB0E0F25E1497700009BED /* StoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListCell.swift; sourceTree = "<group>"; };
+		67FB0E1025E1497700009BED /* StoryListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryListCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +172,7 @@
 		672A624925DA8512009EF6A3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				67FB0E0E25E1495200009BED /* CustomCells */,
 				672A622725DA82E7009EF6A3 /* StoryListViewController.swift */,
 				672A624C25DA8657009EF6A3 /* StoryListViewController.xib */,
 			);
@@ -200,6 +215,7 @@
 		672A625625DA9D16009EF6A3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				67FB0E0925E1447A00009BED /* Data */,
 				67B6F19825DEB392006FE143 /* Extensions */,
 				672A625725DA9D2D009EF6A3 /* Managers */,
 			);
@@ -210,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				672A625825DA9D45009EF6A3 /* ErrorManager.swift */,
+				672923F725E3BC580029E394 /* UserSettings.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -252,6 +269,8 @@
 			isa = PBXGroup;
 			children = (
 				67B6F19925DEB3B2006FE143 /* UIView extensions.swift */,
+				672923F525E3B6A80029E394 /* UINavigationController extensions.swift */,
+				672923F925E3CA360029E394 /* UITableView extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,6 +281,32 @@
 				67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */,
 			);
 			path = TestStoryDetailModule;
+			sourceTree = "<group>";
+		};
+		67E488E925E3D88E006366F0 /* StoryListCell */ = {
+			isa = PBXGroup;
+			children = (
+				67FB0E0F25E1497700009BED /* StoryListCell.swift */,
+				67FB0E1025E1497700009BED /* StoryListCell.xib */,
+			);
+			path = StoryListCell;
+			sourceTree = "<group>";
+		};
+		67FB0E0925E1447A00009BED /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				67FB0E0A25E1449500009BED /* Images.swift */,
+				67FB0E0C25E144ED00009BED /* Colors.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		67FB0E0E25E1495200009BED /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				67E488E925E3D88E006366F0 /* StoryListCell */,
+			);
+			path = CustomCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,6 +395,7 @@
 				672A623025DA82F5009EF6A3 /* LaunchScreen.storyboard in Resources */,
 				67B6F19525DE9053006FE143 /* DetailStoryViewController.xib in Resources */,
 				672A622D25DA82F5009EF6A3 /* Assets.xcassets in Resources */,
+				67FB0E1225E1497700009BED /* StoryListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,14 +414,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				67B6F19725DE9356006FE143 /* DetailStoryViewPresenter.swift in Sources */,
+				67FB0E0D25E144ED00009BED /* Colors.swift in Sources */,
 				67B6F19A25DEB3B2006FE143 /* UIView extensions.swift in Sources */,
 				672A622825DA82E7009EF6A3 /* StoryListViewController.swift in Sources */,
+				672923FA25E3CA360029E394 /* UITableView extensions.swift in Sources */,
 				672A622425DA82E7009EF6A3 /* AppDelegate.swift in Sources */,
 				672A625F25DAA91F009EF6A3 /* Router.swift in Sources */,
 				672A625D25DAA5E6009EF6A3 /* AssemblyModuleBuilder.swift in Sources */,
 				672A625B25DAA099009EF6A3 /* StoriesNetworkService.swift in Sources */,
+				67FB0E0B25E1449500009BED /* Images.swift in Sources */,
+				672923F625E3B6A80029E394 /* UINavigationController extensions.swift in Sources */,
 				67B6F19425DE9052006FE143 /* DetailStoryViewController.swift in Sources */,
 				672A625925DA9D45009EF6A3 /* ErrorManager.swift in Sources */,
+				67FB0E1125E1497700009BED /* StoryListCell.swift in Sources */,
+				672923F825E3BC580029E394 /* UserSettings.swift in Sources */,
 				672A625125DA89E7009EF6A3 /* StoryListViewPresenter.swift in Sources */,
 				672A622625DA82E7009EF6A3 /* SceneDelegate.swift in Sources */,
 				672A625525DA95C1009EF6A3 /* NetworkService.swift in Sources */,

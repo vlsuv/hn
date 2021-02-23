@@ -22,6 +22,7 @@ protocol StoryListViewPresenterProtocol: class {
     var storiesSegmentedIndex: Int { get set }
     func setStoriesSegmentedIndex(index: Int)
     func refreshStories()
+    func changeTheme()
 }
 
 class StoryListViewPresenter: StoryListViewPresenterProtocol {
@@ -75,5 +76,13 @@ class StoryListViewPresenter: StoryListViewPresenterProtocol {
     func refreshStories() {
         self.stories = nil
         self.fetchStories()
+    }
+    
+    func changeTheme() {
+        UserSettings.darkMode = !UserSettings.darkMode
+        
+        UIApplication.shared.windows.forEach{ window in
+            window.overrideUserInterfaceStyle = UserSettings.darkMode ? .dark : .light
+        }
     }
 }
