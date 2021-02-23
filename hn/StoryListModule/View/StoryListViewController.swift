@@ -80,7 +80,7 @@ extension StoryListViewController: StoryListViewProtocol {
         tableView.reload()
     }
     func Failure(withError error: Error) {
-        print(error)
+        showAlert(title: error.localizedDescription, message: nil)
     }
 }
 

@@ -19,4 +19,11 @@ extension UIViewController {
             activityIndicator.stopAnimating()
         }
     }
+    
+    func showAlert(title: String?, message: String?) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }

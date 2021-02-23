@@ -30,7 +30,7 @@
 		67B6F19425DE9052006FE143 /* DetailStoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19225DE9052006FE143 /* DetailStoryViewController.swift */; };
 		67B6F19525DE9053006FE143 /* DetailStoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67B6F19325DE9052006FE143 /* DetailStoryViewController.xib */; };
 		67B6F19725DE9356006FE143 /* DetailStoryViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19625DE9356006FE143 /* DetailStoryViewPresenter.swift */; };
-		67B6F19A25DEB3B2006FE143 /* UIView extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19925DEB3B2006FE143 /* UIView extensions.swift */; };
+		67B6F19A25DEB3B2006FE143 /* UIViewController extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19925DEB3B2006FE143 /* UIViewController extensions.swift */; };
 		67B6F19F25DEBA36006FE143 /* StoryDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */; };
 		67BAAA8825E50876001113F3 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BAAA8625E50876001113F3 /* LoadingCell.swift */; };
 		67BAAA8925E50876001113F3 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BAAA8725E50876001113F3 /* LoadingCell.xib */; };
@@ -78,7 +78,7 @@
 		67B6F19225DE9052006FE143 /* DetailStoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryViewController.swift; sourceTree = "<group>"; };
 		67B6F19325DE9052006FE143 /* DetailStoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailStoryViewController.xib; sourceTree = "<group>"; };
 		67B6F19625DE9356006FE143 /* DetailStoryViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryViewPresenter.swift; sourceTree = "<group>"; };
-		67B6F19925DEB3B2006FE143 /* UIView extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView extensions.swift"; sourceTree = "<group>"; };
+		67B6F19925DEB3B2006FE143 /* UIViewController extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController extensions.swift"; sourceTree = "<group>"; };
 		67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailPresenterTest.swift; sourceTree = "<group>"; };
 		67BAAA8625E50876001113F3 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		67BAAA8725E50876001113F3 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 		67B6F19825DEB392006FE143 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				67B6F19925DEB3B2006FE143 /* UIView extensions.swift */,
+				67B6F19925DEB3B2006FE143 /* UIViewController extensions.swift */,
 				672923F525E3B6A80029E394 /* UINavigationController extensions.swift */,
 				672923F925E3CA360029E394 /* UITableView extensions.swift */,
 			);
@@ -430,7 +430,7 @@
 			files = (
 				67B6F19725DE9356006FE143 /* DetailStoryViewPresenter.swift in Sources */,
 				67FB0E0D25E144ED00009BED /* Colors.swift in Sources */,
-				67B6F19A25DEB3B2006FE143 /* UIView extensions.swift in Sources */,
+				67B6F19A25DEB3B2006FE143 /* UIViewController extensions.swift in Sources */,
 				672A622825DA82E7009EF6A3 /* StoryListViewController.swift in Sources */,
 				672923FA25E3CA360029E394 /* UITableView extensions.swift in Sources */,
 				672A622425DA82E7009EF6A3 /* AppDelegate.swift in Sources */,
