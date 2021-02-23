@@ -18,6 +18,7 @@ enum Endpoint {
     
     case topstories
     case newstories
+    case showstories
     case story(Int)
     
     var request: URLRequest {
@@ -27,6 +28,9 @@ enum Endpoint {
             return URLRequest(url: url)
         case .newstories:
             let url = Endpoint.baseURL.appendingPathComponent("newstories.json")
+            return URLRequest(url: url)
+        case .showstories:
+            let url = Endpoint.baseURL.appendingPathComponent("showstories.json")
             return URLRequest(url: url)
         case .story(let id):
             let url = Endpoint.baseURL.appendingPathComponent("item/\(id).json")
@@ -38,6 +42,7 @@ enum Endpoint {
         switch index {
         case 0: self = .topstories
         case 1: self = .newstories
+        case 2: self = .showstories
         default: return nil
         }
     }
