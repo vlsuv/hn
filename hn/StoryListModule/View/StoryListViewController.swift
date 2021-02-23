@@ -13,7 +13,6 @@ class StoryListViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    private let loadingActivityIndicator = UIActivityIndicatorView()
     var presenter: StoryListViewPresenterProtocol!
     
     // MARK: - Init
@@ -22,22 +21,21 @@ class StoryListViewController: UIViewController {
         view.backgroundColor = AssetsColors.background
         
         configureTableView()
-        configureLoadingActivityIndicator()
         configureSegmentedControl()
         configureNavigationController()
+        
+        presenter.fetchStories()
     }
     
     // MARK: - Actions
     @objc private func didChangeSegmentedControlValue(_ sender: UISegmentedControl) {
         presenter.setStoriesSegmentedIndex(index: sender.selectedSegmentIndex)
         tableView.reloadData()
-        loadingActivityIndicator.startAnimating()
     }
     
     @objc private func didTapRefreshButton(_ sender: UIBarButtonItem) {
         presenter.refreshStories()
         tableView.reloadData()
-        loadingActivityIndicator.startAnimating()
     }
     
     @objc private func didTapThemeButton(_ sender: UIBarButtonItem) {
@@ -47,7 +45,8 @@ class StoryListViewController: UIViewController {
     // MARK: - Handlers
     private func configureTableView() {
         tableView.register(UINib(nibName: StoryListCell.identifier, bundle: nil), forCellReuseIdentifier: StoryListCell.identifier)
-        tableView.tableFooterView = loadingActivityIndicator
+        tableView.register(UINib(nibName: LoadingCell.identifier, bundle: nil), forCellReuseIdentifier: LoadingCell.identifier)
+        tableView.tableFooterView = UIView()
         tableView.tableFooterView?.frame.size.height = tableView.rowHeight
         
         tableView.rowHeight = 48
@@ -64,11 +63,6 @@ class StoryListViewController: UIViewController {
         navigationController?.toTransparent()
     }
     
-    private func configureLoadingActivityIndicator() {
-        loadingActivityIndicator.hidesWhenStopped = true
-        loadingActivityIndicator.color = AssetsColors.text
-    }
-    
     private func configureSegmentedControl() {
         segmentedControl.addTarget(self, action: #selector(didChangeSegmentedControlValue(_:)), for: .valueChanged)
         
@@ -83,27 +77,40 @@ class StoryListViewController: UIViewController {
 // MARK: - StoryListViewProtocol
 extension StoryListViewController: StoryListViewProtocol {
     func Succes() {
-        loadingActivityIndicator.stopAnimating()
         tableView.reload()
     }
     func Failure(withError error: Error) {
-        loadingActivityIndicator.stopAnimating()
         print(error)
     }
 }
 
 // MARK: - UITableViewDataSource
 extension StoryListViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.stories?.count ?? 0
+        if section == 0 {
+            return presenter.stories?.count ?? 0
+        } else if section == 1 && presenter.isLoading {
+            return 1
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryListCell.identifier, for: indexPath) as? StoryListCell else { return UITableViewCell() }
-        if let story = presenter.stories?[indexPath.row] {
-            cell.storyTitleLabel.text = story.title
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: StoryListCell.identifier, for: indexPath) as? StoryListCell else { return UITableViewCell() }
+            if let story = presenter.stories?[indexPath.row] {
+                cell.storyTitleLabel.text = story.title
+            }
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: LoadingCell.identifier, for: indexPath) as? LoadingCell else { return UITableViewCell() }
+            cell.activityIndicator.startAnimating()
+            return cell
         }
-        return cell
     }
 }
 
@@ -120,8 +127,8 @@ extension StoryListViewController: UITableViewDelegate {
         
         if offsetY > contentHeight - scrollView.frame.height {
             if !presenter.isLoading {
-                loadingActivityIndicator.startAnimating()
                 presenter.fetchStories()
+                tableView.reloadSections(IndexSet(integer: 1), with: .none)
             }
         }
     }
