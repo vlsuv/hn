@@ -8,6 +8,7 @@ A Hacker News reader iOS app written in Swift.
 - Without the use of storyboards.
 - Support for light and dark mode.
 - Use UserDefaults for saving theme.
+- Unit Tests
 
 # Screenshots
 [HackerNews]: screenshots/HackerNews.png
