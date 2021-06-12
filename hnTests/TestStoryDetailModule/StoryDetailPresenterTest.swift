@@ -15,6 +15,13 @@ protocol MockViewProtocol: DetailStoryViewProtocol {
 }
 
 class MockView: MockViewProtocol {
+    func loadWebViewWithRequest(_ request: URLRequest) {
+        self.request = request
+    }
+    
+    func loadWebViewWithText(_ text: String) {
+    }
+    
     var request: URLRequest?
     var presenter: DetailStoryViewPresenterProtocol!
     
@@ -44,7 +51,7 @@ class StoryDetailPresenterTest: XCTestCase {
     }
     
     func testLoadWebView() {
-        presenter = DetailStoryViewPresenter(view: view, router: router, story: Story(by: "baz", descendants: nil, id: 0, kids: nil, score: 0, time: 0, title: "baz", type: "baz", url: "https://xxx.xxxxxx.xxx"))
+        presenter = DetailStoryViewPresenter(view: view, router: router, story: Story(by: "baz", descendants: nil, id: 0, kids: nil, score: 0, time: 0, title: "baz", type: "baz", url: "https://xxx.xxxxxx.xxx", text: nil))
         view.presenter = presenter
         presenter.loadWebView()
         

@@ -33,7 +33,7 @@ class MockStoriesNetworkService: StoriesNetworkServiceProtocol {
         self.stories = stories
     }
     
-    func fetchStories(withEndpoint endpoint: Endpoint, completionHandler: @escaping (NetworkServiceResult<[Story]>) -> ()) {
+    func fetchStories(withEndpoint endpoint: Endpoint, length: Int, completionHandler: @escaping (NetworkServiceResult<[Story]>) -> ()) {
         if let stories = stories {
             completionHandler(.Succes(stories))
         }else {
@@ -63,10 +63,11 @@ class StoryListViewTest: XCTestCase {
     }
     
     func testGetSuccesData() {
-        storiesNetworkService = MockStoriesNetworkService(stories: [Story(by: "baz", descendants: nil, id: 0, kids: nil, score: 0, time: 0, title: "baz", type: "baz", url: "baz")])
+        storiesNetworkService = MockStoriesNetworkService(stories: [Story(by: "baz", descendants: nil, id: 0, kids: nil, score: 0, time: 0, title: "baz", type: "baz", url: "baz", text: nil)])
         
         var catchStories: [Story]?
-        storiesNetworkService.fetchStories(withEndpoint: .topstories) { networkServiceResult in
+        
+        storiesNetworkService.fetchStories(withEndpoint: .topstories, length: 10) { networkServiceResult in
             switch networkServiceResult {
             case .Succes(let result):
                 catchStories = result
@@ -82,7 +83,7 @@ class StoryListViewTest: XCTestCase {
         storiesNetworkService = MockStoriesNetworkService(stories: nil)
         
         var catchError: Error?
-        storiesNetworkService.fetchStories(withEndpoint: .topstories) { networkServiceResult in
+        storiesNetworkService.fetchStories(withEndpoint: .topstories, length: 10) { networkServiceResult in
             switch networkServiceResult {
             case .Succes(_):
                 break
