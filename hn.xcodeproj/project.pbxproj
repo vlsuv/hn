@@ -28,6 +28,7 @@
 		674925C6268749F100909EC9 /* StoryListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 674925C5268749F100909EC9 /* StoryListController.xib */; };
 		674925C82687593700909EC9 /* DetailStoryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 674925C72687593700909EC9 /* DetailStoryController.xib */; };
 		674E9DC8268A07FD0023FAEB /* UIScrollView extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674E9DC7268A07FD0023FAEB /* UIScrollView extensions.swift */; };
+		67849C05268A1ED3005F1AB2 /* SFSafariCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67849C04268A1ED3005F1AB2 /* SFSafariCoordinator.swift */; };
 		67B6F18925DE73D2006FE143 /* StoryListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F18825DE73D2006FE143 /* StoryListPresenterTest.swift */; };
 		67B6F18B25DE7E95006FE143 /* RouterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F18A25DE7E95006FE143 /* RouterTest.swift */; };
 		67B6F19425DE9052006FE143 /* DetailStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19225DE9052006FE143 /* DetailStoryController.swift */; };
@@ -80,6 +81,7 @@
 		674925C5268749F100909EC9 /* StoryListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryListController.xib; sourceTree = "<group>"; };
 		674925C72687593700909EC9 /* DetailStoryController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailStoryController.xib; sourceTree = "<group>"; };
 		674E9DC7268A07FD0023FAEB /* UIScrollView extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView extensions.swift"; sourceTree = "<group>"; };
+		67849C04268A1ED3005F1AB2 /* SFSafariCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariCoordinator.swift; sourceTree = "<group>"; };
 		67B6F18825DE73D2006FE143 /* StoryListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListPresenterTest.swift; sourceTree = "<group>"; };
 		67B6F18A25DE7E95006FE143 /* RouterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTest.swift; sourceTree = "<group>"; };
 		67B6F19225DE9052006FE143 /* DetailStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				6700352D26872F6300EC7F23 /* AppCoordinator.swift */,
 				670035312687309300EC7F23 /* StoryListCoordinator.swift */,
 				67003535268740AF00EC7F23 /* DetailStoryCoordinator.swift */,
+				67849C04268A1ED3005F1AB2 /* SFSafariCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				672A625125DA89E7009EF6A3 /* StoryListViewModel.swift in Sources */,
 				6700352E26872F6300EC7F23 /* AppCoordinator.swift in Sources */,
 				672A622625DA82E7009EF6A3 /* SceneDelegate.swift in Sources */,
+				67849C05268A1ED3005F1AB2 /* SFSafariCoordinator.swift in Sources */,
 				672A625525DA95C1009EF6A3 /* NetworkService.swift in Sources */,
 				672A624F25DA899E009EF6A3 /* Story.swift in Sources */,
 			);

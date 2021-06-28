@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SafariServices
 
 protocol AssemblyBuilderProtocol {
     func createStoryListController(coordinator: StoryListCoordinator) -> UIViewController
     func createDetailStoryController(coordinator: DetailStoryCoordinator, story: Story) -> UIViewController
+    func createSafariController(with url: URL) -> SFSafariViewController
 }
 
 class AssemblyBuilder: AssemblyBuilderProtocol {
@@ -30,5 +32,10 @@ class AssemblyBuilder: AssemblyBuilderProtocol {
         detailStoryController.viewModel = detailStoryViewModel
         
         return detailStoryController
+    }
+    
+    func createSafariController(with url: URL) -> SFSafariViewController {
+        let safariController = SFSafariViewController(url: url)
+        return safariController
     }
 }

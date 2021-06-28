@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SafariServices
 
 class DetailStoryController: UIViewController {
     
@@ -40,11 +41,9 @@ class DetailStoryController: UIViewController {
     }
     
     private func loadWebView() {
-        if let text = viewModel?.text {
-            webView.loadHTMLString(text, baseURL: nil)
-        } else if let request = viewModel?.request {
-            webView.load(request)
-        }
+        guard let htmlText = viewModel?.outputs.htmlText else { return }
+        
+        webView.loadHTMLString(htmlText, baseURL: nil)
     }
 }
 

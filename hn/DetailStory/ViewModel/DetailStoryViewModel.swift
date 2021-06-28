@@ -8,26 +8,32 @@
 
 import UIKit
 
-protocol DetailStoryViewModelType {
-    var text: String? { get }
-    var request: URLRequest? { get }
+protocol DetailStoryViewModelInputs {
 }
 
-class DetailStoryViewModel: DetailStoryViewModelType {
+protocol DetailStoryViewModelOutputs {
+    var htmlText: String? { get }
+}
+
+protocol DetailStoryViewModelType {
+    var inputs: DetailStoryViewModelInputs { get }
+    var outputs: DetailStoryViewModelOutputs { get }
+}
+
+class DetailStoryViewModel: DetailStoryViewModelType, DetailStoryViewModelInputs, DetailStoryViewModelOutputs {
     
     // MARK: - Properties
+    var inputs: DetailStoryViewModelInputs { return self }
+    var outputs: DetailStoryViewModelOutputs { return self }
+    
     private let coordinator: DetailStoryCoordinator
     
     private var story: Story
     
-    var text: String? {
-        return story.text
-    }
-    
-    var request: URLRequest? {
-        guard let stringURL = story.url, let url = URL(string: stringURL) else { return nil }
+    var htmlText: String? {
+        guard let text = story.text else { return nil }
         
-        return URLRequest(url: url)
+        return text
     }
     
     // MARK: - Init

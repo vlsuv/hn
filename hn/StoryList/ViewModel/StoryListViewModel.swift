@@ -95,7 +95,11 @@ class StoryListViewModel: StoryListViewModelProtocol, StoryListViewModelInputs, 
     func didTapShowDetail(at indexPath: IndexPath) {
         let story = stories.value[indexPath.row]
         
-        coordinator?.showDetailStory(for: story)
+        if let _ = story.text {
+            coordinator?.showDetailStory(for: story)
+        } else if let stringURL = story.url, let url = URL(string: stringURL) {
+            coordinator?.showSafari(with: url)
+        }
     }
     
     func didTapRefreshStories() {

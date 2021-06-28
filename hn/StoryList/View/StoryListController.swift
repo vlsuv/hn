@@ -80,6 +80,8 @@ class StoryListController: UIViewController {
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.viewModel?.inputs.didTapShowDetail(at: indexPath)
+                
+                self?.tableView.deselectRow(at: indexPath, animated: true)
             })
             .disposed(by: disposeBag)
         
@@ -115,13 +117,11 @@ class StoryListController: UIViewController {
     }
     
     private func setupLoadingState() {
-        viewModel?.outputs.isLoading.asDriver()
+        viewModel?.outputs.isLoading
+            .asDriver()
             .drive(onNext: { isLoading in
-                if isLoading {
-                    self.activityIndicator.startAnimating()
-                } else {
-                    self.activityIndicator.stopAnimating()
-                }
-            }).disposed(by: disposeBag)
+                isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+            })
+            .disposed(by: disposeBag)
     }
 }

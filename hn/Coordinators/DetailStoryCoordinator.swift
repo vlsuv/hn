@@ -30,6 +30,10 @@ class DetailStoryCoordinator: Coordinator {
         self.assemblyBuilder = AssemblyBuilder()
     }
     
+    deinit {
+        print("deinit: \(self)")
+    }
+    
     // MARK: - Handlers
     func start() {
         let detailStoryController = assemblyBuilder.createDetailStoryController(coordinator: self, story: story)

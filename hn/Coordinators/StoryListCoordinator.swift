@@ -26,7 +26,6 @@ class StoryListCoordinator: Coordinator {
         self.assemblyBuilder = AssemblyBuilder()
     }
     
-    
     // MARK: - Handlers
     func start() {
         let storyListController = assemblyBuilder.createStoryListController(coordinator: self)
@@ -34,10 +33,24 @@ class StoryListCoordinator: Coordinator {
         navigationController.viewControllers = [storyListController]
     }
     
+    func showSafari(with url: URL) {
+        let safariCoordinator = SFSafariCoordinator(navigationController: navigationController, url: url)
+        safariCoordinator.start()
+        safariCoordinator.parentCoordinator = self
+        childCoordinators.append(safariCoordinator)
+    }
+    
     func showDetailStory(for story: Story) {
         let detailStoryCoordinator = DetailStoryCoordinator(navigationController: navigationController, story: story)
         detailStoryCoordinator.start()
         detailStoryCoordinator.parentCoordinator = self
         childCoordinators.append(detailStoryCoordinator)
+    }
+}
+
+extension StoryListCoordinator {
+    func childDidFinish(_ childCoordinator: Coordinator) {
+        guard let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) else { return }
+        childCoordinators.remove(at: index)
     }
 }
