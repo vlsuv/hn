@@ -19,12 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let rootNavigationController = UINavigationController()
-        let assemblyBuilder = AssemblyModuleBuilder()
-        let router = Router(navigationController: rootNavigationController, assemblyBuilder: assemblyBuilder)
-        router.initialViewController()
-        window?.rootViewController = rootNavigationController
-        window?.makeKeyAndVisible()
+        
+        if let window = window {
+            let appCoordinator = AppCoordinator(window: window)
+            appCoordinator.start()
+        }
         
         window?.overrideUserInterfaceStyle = UserSettings.darkMode ? .dark : .light
     }

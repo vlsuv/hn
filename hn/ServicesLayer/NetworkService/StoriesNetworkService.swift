@@ -7,11 +7,9 @@
 //
 
 import UIKit
-
-protocol StoriesNetworkServiceProtocol: NetworkServiceProtocol {
-    init(sessionConfiguration: URLSessionConfiguration)
-    func fetchStories(withEndpoint endpoint: Endpoint, length: Int, completionHandler: @escaping (NetworkServiceResult<[Story]>) -> ())
-}
+import RxSwift
+import RxCocoa
+import Alamofire
 
 enum Endpoint {
     static let baseURL: URL = URL(string: "https://hacker-news.firebaseio.com/v0/")!
@@ -48,91 +46,52 @@ enum Endpoint {
     }
 }
 
-final class StoriesNetworkService: StoriesNetworkServiceProtocol {
-    var sessionConfiguration: URLSessionConfiguration
-    lazy var session: URLSession = {
-        return URLSession(configuration: self.sessionConfiguration)
-    }()
+protocol StoriesNetworkServiceProtocol: NetworkServiceProtocol {
+    func stories(from endpoint: Endpoint) -> Observable<[Story]>
+    func nextStories() -> Observable<[Story]>
+}
+
+class StoriesNetworkService: StoriesNetworkServiceProtocol {
     
-    init(sessionConfiguration: URLSessionConfiguration) {
-        self.sessionConfiguration = sessionConfiguration
+    private var maxLength: Int = 20
+    
+    private var loadIDs: [Int] = [Int]()
+    
+    func stories(from endpoint: Endpoint) -> Observable<[Story]> {
+        return storyIDs(from: endpoint)
+            .do(onNext: {
+                self.maxLength = 20
+                self.loadIDs = $0
+            })
+            .map { $0.prefix(self.maxLength) }
+            .flatMap { Observable.from($0) }
+            .flatMap { self.story(id: $0) }
+            .toArray()
+            .catchAndReturn( [Story]() )
+            .filter { !$0.isEmpty }
+            .asObservable()
     }
     
-    convenience init() {
-        self.init(sessionConfiguration: URLSessionConfiguration.default)
-    }
-    
-    func fetchStoryIDs(from endpoint: Endpoint, length: Int, completionHandler: @escaping ([Int]?, Error?) -> ()) {
-        fetch(request: endpoint.request, parse: { (data) -> ([Int])? in
-            if let storyIDs = try? JSONDecoder().decode([Int].self, from: data) {
-                return storyIDs
-            }else {
-                return nil
-            }
-        }) { (networkServiceResult) in
-            switch networkServiceResult {
-            case .Succes(let storyIDs):
-                let storyIDs = Array(storyIDs.prefix(length))
-                completionHandler(storyIDs, nil)
-            case .Failure(let error):
-                completionHandler(nil, error)
-            }
-        }
-    }
-    
-    func fetchStoriesArticle(id: Int, completionHandler: @escaping (Story?, Error?) -> ()) {
-        let request = Endpoint.story(id).request
+    func nextStories() -> Observable<[Story]> {
+        let ids = Array(loadIDs[maxLength..<maxLength + 20])
         
-        fetch(request: request, parse: { (data) -> (Story)? in
-            if let story = try? JSONDecoder().decode(Story.self, from: data) {
-                return story
-            }else {
-                return nil
-            }
-        }) { (networkServiceResult) in
-            switch networkServiceResult {
-            case .Succes(let story):
-                completionHandler(story, nil)
-            case .Failure(let error):
-                print("ParseErrorID: \(id)")
-                completionHandler(nil, error)
-            }
-        }
+        let observable = Observable.of(ids)
+            .do(onNext: { _ in self.maxLength += 20 })
+            .flatMap { Observable.from($0) }
+            .flatMap { self.story(id: $0) }
+            .toArray()
+            .catchAndReturn([Story]())
+            .filter { !$0.isEmpty }
+            .asObservable()
+        
+        return observable
     }
     
-    func fetchStories(withEndpoint endpoint: Endpoint, length: Int, completionHandler: @escaping (NetworkServiceResult<[Story]>) -> ()) {
-        fetchStoryIDs(from: endpoint, length: length) { (storyIDs, error) in
-            guard let storyIDs = storyIDs else {
-                if let error = error {
-                    completionHandler(.Failure(error))
-                }
-                return
-            }
-            
-            var stories: [Story] = [Story]()
-            let queue = DispatchQueue(label: "StoriesQueue", attributes: .concurrent)
-            let group = DispatchGroup()
-            
-            storyIDs.forEach {
-                group.enter()
-                self.fetchStoriesArticle(id: $0) { (story, error) in
-                    queue.async(flags: .barrier) {
-                        guard let story = story else {
-                            if let error = error {
-                                print(error)
-                            }
-                            group.leave()
-                            return
-                        }
-                        stories.append(story)
-                        group.leave()
-                    }
-                }
-            }
-            
-            group.notify(queue: queue) {
-                completionHandler(.Succes(stories))
-            }
-        }
+    private func storyIDs(from endpoint: Endpoint) -> Observable<[Int]> {
+        return fetch(endpoint.request)
+    }
+    
+    private func story(id: Int) -> Observable<Story> {
+        return fetch(Endpoint.story(id).request)
     }
 }

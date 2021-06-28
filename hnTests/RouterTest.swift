@@ -37,13 +37,13 @@ class RouterTest: XCTestCase {
         router = Router(navigationController: navigationController, assemblyBuilder: assemblyModuleBuilder)
         router.initialViewController()
         
-        XCTAssertTrue(navigationController.viewControllers[0] is StoryListViewController)
+        XCTAssertTrue(navigationController.viewControllers[0] is StoryListController)
     }
     
     func testShowStoryDetailViewController() {
         router = Router(navigationController: navigationController, assemblyBuilder: assemblyModuleBuilder)
         router.showDetail(withStory: nil)
         
-        XCTAssertTrue(navigationController.presentedVC is DetailStoryViewController)
+        XCTAssertTrue(navigationController.presentedVC is DetailStoryController)
     }
 }

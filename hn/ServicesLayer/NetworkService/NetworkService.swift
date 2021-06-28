@@ -7,62 +7,49 @@
 //
 
 import UIKit
+import RxSwift
+import Alamofire
 
-typealias NetworkServiceCompletionHandler = (Data?, URLResponse?, Error?) -> ()
-
-enum NetworkServiceResult<T> {
-    case Succes(T)
-    case Failure(Error)
+enum NetworkServiceError: Error {
+    case forbidden
+    case notFound
+    case conflict
+    case internalServerError
 }
 
 protocol NetworkServiceProtocol {
-    var sessionConfiguration: URLSessionConfiguration { get }
-    var session: URLSession { get }
-    func fetchDataWith(request: URLRequest, completionHandler: @escaping NetworkServiceCompletionHandler) -> URLSessionDataTask?
-    func fetch<T>(request: URLRequest, parse: @escaping (Data) -> (T)?, completionHandler: @escaping (NetworkServiceResult<T>) -> ())
+    func fetch<T: Decodable>(_ request: URLRequestConvertible) -> Observable<T>
 }
 
 extension NetworkServiceProtocol {
-    func fetchDataWith(request: URLRequest, completionHandler: @escaping NetworkServiceCompletionHandler) -> URLSessionDataTask? {
-        let dataTask = session.dataTask(with: request) { data, responce, error in
-            if let error = error {
-                completionHandler(nil, nil, error)
-                return
-            }
+    func fetch<T: Decodable>(_ request: URLRequestConvertible) -> Observable<T> {
+        return Observable<T>.create { observable -> Disposable in
             
-            guard let HTTPResponce = responce as? HTTPURLResponse else {
-                let error = ErrorManager.MissingHTTPResponce
-                completionHandler(nil, nil, error)
-                return
-            }
-            
-            switch HTTPResponce.statusCode {
-            case 200:
-                completionHandler(data, HTTPResponce, nil)
-            default:
-                let error = ErrorManager.StatusCodeError(HTTPResponce.statusCode)
-                completionHandler(nil, HTTPResponce, error)
-            }
-        }
-        return dataTask
-    }
-    
-    func fetch<T>(request: URLRequest, parse: @escaping (Data) -> (T)?, completionHandler: @escaping (NetworkServiceResult<T>) -> ()) {
-        let dataTask = fetchDataWith(request: request) { data, responce, error in
-            guard let data = data else {
-                if let error = error {
-                    completionHandler(.Failure(error))
+            let request = AF.request(request).responseDecodable(of: T.self) { (response) in
+                switch response.result {
+                case .success(let value):
+                    observable.onNext(value)
+                    observable.onCompleted()
+                case .failure(let error):
+                    
+                    switch response.response?.statusCode {
+                    case 403:
+                        observable.onError(NetworkServiceError.forbidden)
+                    case 404:
+                        observable.onError(NetworkServiceError.notFound)
+                    case 409:
+                        observable.onError(NetworkServiceError.conflict)
+                    case 500:
+                        observable.onError(NetworkServiceError.internalServerError)
+                    default:
+                        observable.onError(error)
+                    }
                 }
-                return
             }
             
-            if let value = parse(data) {
-                completionHandler(.Succes(value))
-            } else {
-                let error = ErrorManager.DataParseError
-                completionHandler(.Failure(error))
+            return Disposables.create {
+                request.cancel()
             }
         }
-        dataTask?.resume()
     }
 }
