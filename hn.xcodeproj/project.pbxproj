@@ -28,16 +28,15 @@
 		674925C6268749F100909EC9 /* StoryListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 674925C5268749F100909EC9 /* StoryListController.xib */; };
 		674925C82687593700909EC9 /* DetailStoryController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 674925C72687593700909EC9 /* DetailStoryController.xib */; };
 		674E9DC8268A07FD0023FAEB /* UIScrollView extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674E9DC7268A07FD0023FAEB /* UIScrollView extensions.swift */; };
+		675160DE268B347400ABFD53 /* StoryListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675160DD268B347400ABFD53 /* StoryListCellViewModel.swift */; };
 		67849C05268A1ED3005F1AB2 /* SFSafariCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67849C04268A1ED3005F1AB2 /* SFSafariCoordinator.swift */; };
 		67B6F18925DE73D2006FE143 /* StoryListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F18825DE73D2006FE143 /* StoryListPresenterTest.swift */; };
 		67B6F18B25DE7E95006FE143 /* RouterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F18A25DE7E95006FE143 /* RouterTest.swift */; };
 		67B6F19425DE9052006FE143 /* DetailStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19225DE9052006FE143 /* DetailStoryController.swift */; };
 		67B6F19725DE9356006FE143 /* DetailStoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19625DE9356006FE143 /* DetailStoryViewModel.swift */; };
 		67B6F19F25DEBA36006FE143 /* StoryDetailPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */; };
-		67BAAA8825E50876001113F3 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BAAA8625E50876001113F3 /* LoadingCell.swift */; };
-		67BAAA8925E50876001113F3 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BAAA8725E50876001113F3 /* LoadingCell.xib */; };
 		67FB0E0B25E1449500009BED /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB0E0A25E1449500009BED /* Image.swift */; };
-		67FB0E0D25E144ED00009BED /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB0E0C25E144ED00009BED /* Colors.swift */; };
+		67FB0E0D25E144ED00009BED /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB0E0C25E144ED00009BED /* Color.swift */; };
 		67FB0E1125E1497700009BED /* StoryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB0E0F25E1497700009BED /* StoryListCell.swift */; };
 		67FB0E1225E1497700009BED /* StoryListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67FB0E1025E1497700009BED /* StoryListCell.xib */; };
 		73AB8DA79DA2A4225EBD20CB /* Pods_hnTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1903DF6213159CAD68E3FA8C /* Pods_hnTests.framework */; };
@@ -81,16 +80,15 @@
 		674925C5268749F100909EC9 /* StoryListController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryListController.xib; sourceTree = "<group>"; };
 		674925C72687593700909EC9 /* DetailStoryController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailStoryController.xib; sourceTree = "<group>"; };
 		674E9DC7268A07FD0023FAEB /* UIScrollView extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView extensions.swift"; sourceTree = "<group>"; };
+		675160DD268B347400ABFD53 /* StoryListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListCellViewModel.swift; sourceTree = "<group>"; };
 		67849C04268A1ED3005F1AB2 /* SFSafariCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariCoordinator.swift; sourceTree = "<group>"; };
 		67B6F18825DE73D2006FE143 /* StoryListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListPresenterTest.swift; sourceTree = "<group>"; };
 		67B6F18A25DE7E95006FE143 /* RouterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTest.swift; sourceTree = "<group>"; };
 		67B6F19225DE9052006FE143 /* DetailStoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryController.swift; sourceTree = "<group>"; };
 		67B6F19625DE9356006FE143 /* DetailStoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStoryViewModel.swift; sourceTree = "<group>"; };
 		67B6F19E25DEBA36006FE143 /* StoryDetailPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryDetailPresenterTest.swift; sourceTree = "<group>"; };
-		67BAAA8625E50876001113F3 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
-		67BAAA8725E50876001113F3 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		67FB0E0A25E1449500009BED /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		67FB0E0C25E144ED00009BED /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		67FB0E0C25E144ED00009BED /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		67FB0E0F25E1497700009BED /* StoryListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryListCell.swift; sourceTree = "<group>"; };
 		67FB0E1025E1497700009BED /* StoryListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoryListCell.xib; sourceTree = "<group>"; };
 		6ED43089C0C33AC6C8816FDA /* Pods_hn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -324,18 +322,10 @@
 			path = TestStoryDetailModule;
 			sourceTree = "<group>";
 		};
-		67BAAA8525E50846001113F3 /* LoadingCell */ = {
-			isa = PBXGroup;
-			children = (
-				67BAAA8625E50876001113F3 /* LoadingCell.swift */,
-				67BAAA8725E50876001113F3 /* LoadingCell.xib */,
-			);
-			path = LoadingCell;
-			sourceTree = "<group>";
-		};
 		67E488E925E3D88E006366F0 /* StoryListCell */ = {
 			isa = PBXGroup;
 			children = (
+				675160DD268B347400ABFD53 /* StoryListCellViewModel.swift */,
 				67FB0E0F25E1497700009BED /* StoryListCell.swift */,
 				67FB0E1025E1497700009BED /* StoryListCell.xib */,
 			);
@@ -346,7 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				67FB0E0A25E1449500009BED /* Image.swift */,
-				67FB0E0C25E144ED00009BED /* Colors.swift */,
+				67FB0E0C25E144ED00009BED /* Color.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -354,7 +344,6 @@
 		67FB0E0E25E1495200009BED /* CustomCells */ = {
 			isa = PBXGroup;
 			children = (
-				67BAAA8525E50846001113F3 /* LoadingCell */,
 				67E488E925E3D88E006366F0 /* StoryListCell */,
 			);
 			path = CustomCells;
@@ -453,7 +442,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67BAAA8925E50876001113F3 /* LoadingCell.xib in Resources */,
 				674925C6268749F100909EC9 /* StoryListController.xib in Resources */,
 				674925C82687593700909EC9 /* DetailStoryController.xib in Resources */,
 				672A624625DA8320009EF6A3 /* .gitignore in Resources */,
@@ -543,10 +531,11 @@
 			files = (
 				67B6F19725DE9356006FE143 /* DetailStoryViewModel.swift in Sources */,
 				674E9DC8268A07FD0023FAEB /* UIScrollView extensions.swift in Sources */,
-				67FB0E0D25E144ED00009BED /* Colors.swift in Sources */,
+				67FB0E0D25E144ED00009BED /* Color.swift in Sources */,
 				672A622825DA82E7009EF6A3 /* StoryListController.swift in Sources */,
 				672A622425DA82E7009EF6A3 /* AppDelegate.swift in Sources */,
 				672A625B25DAA099009EF6A3 /* StoriesNetworkService.swift in Sources */,
+				675160DE268B347400ABFD53 /* StoryListCellViewModel.swift in Sources */,
 				670035322687309300EC7F23 /* StoryListCoordinator.swift in Sources */,
 				67FB0E0B25E1449500009BED /* Image.swift in Sources */,
 				672923F625E3B6A80029E394 /* UINavigationController extensions.swift in Sources */,
@@ -554,7 +543,6 @@
 				67003536268740AF00EC7F23 /* DetailStoryCoordinator.swift in Sources */,
 				67FB0E1125E1497700009BED /* StoryListCell.swift in Sources */,
 				670035302687302900EC7F23 /* Coordinator.swift in Sources */,
-				67BAAA8825E50876001113F3 /* LoadingCell.swift in Sources */,
 				670035342687324900EC7F23 /* AssemblyBuilder.swift in Sources */,
 				672923F825E3BC580029E394 /* UserSettings.swift in Sources */,
 				672A625125DA89E7009EF6A3 /* StoryListViewModel.swift in Sources */,

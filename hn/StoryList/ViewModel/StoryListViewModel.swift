@@ -21,6 +21,7 @@ protocol StoryListViewModelOutputs {
     var stories: BehaviorRelay<[Story]> { get }
     var indexEndpoint: BehaviorRelay<Int> { get }
     var isLoading: BehaviorRelay<Bool> { get }
+    func storyListViewModelCell(for item: Story) -> StoryListCellViewModelType
 }
 
 protocol StoryListViewModelProtocol: class {
@@ -109,5 +110,10 @@ class StoryListViewModel: StoryListViewModelProtocol, StoryListViewModelInputs, 
         UIApplication.shared.windows.forEach{ window in
             window.overrideUserInterfaceStyle = UserSettings.darkMode ? .dark : .light
         }
+    }
+    
+    // MARK: - Outputs Handlers
+    func storyListViewModelCell(for item: Story) -> StoryListCellViewModelType {
+        return StoryListCellViewModel(story: item)
     }
 }

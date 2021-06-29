@@ -73,6 +73,8 @@ class StoryListController: UIViewController {
     }
     
     private func configureTableView() {
+        tableView.rx.setDelegate(self).disposed(by: disposeBag)
+        
         tableView.register(UINib(nibName: StoryListCell.identifier, bundle: nil), forCellReuseIdentifier: StoryListCell.identifier)
         
         // When received data to change tableView
@@ -83,7 +85,8 @@ class StoryListController: UIViewController {
                 if !stories.isEmpty { self?.shouldLoadNextData = true }
             })
             .bind(to: tableView.rx.items(cellIdentifier: StoryListCell.identifier, cellType: StoryListCell.self)) { row, item, cell in
-                cell.storyTitleLabel.text = item.title
+                
+                cell.viewModel = self.viewModel?.outputs.storyListViewModelCell(for: item)
         }
         .disposed(by: disposeBag)
         
@@ -99,11 +102,12 @@ class StoryListController: UIViewController {
             .disposed(by: disposeBag)
         
         // tableView UI
-        tableView.rowHeight = 48
+        tableView.estimatedRowHeight = 85
         tableView.tableFooterView = activityIndicator
-        tableView.tableFooterView?.frame.size.height = tableView.rowHeight + 10
+        tableView.tableFooterView?.frame.size.height = 48
         tableView.separatorStyle = .singleLine
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+//        tableView.separatorInset = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
+//        tableView.separatorColor = Colors.lightGray
     }
     
     private func configureSegmentedControl() {
@@ -147,5 +151,12 @@ class StoryListController: UIViewController {
                 isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
             })
             .disposed(by: disposeBag)
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension StoryListController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

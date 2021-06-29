@@ -8,9 +8,10 @@
 
 import UIKit
 
-enum Colors {
+enum Color {
     static let white = UIColor.white
     static let black = UIColor.black
+    static let mediumGray = UIColor(named: "MediumGrayColor")
 }
 
 enum AssetsColors {
