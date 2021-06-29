@@ -30,6 +30,15 @@ class DetailStoryController: UIViewController {
         loadWebView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        viewModel?.inputs.viewDidDisappear()
+    }
+    
+    deinit {
+        print("deinit: \(self)")
+    }
+    
     // MARK: - Setups
     private func configureWebView() {
         webView.navigationDelegate = self

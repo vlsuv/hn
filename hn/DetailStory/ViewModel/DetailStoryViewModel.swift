@@ -9,6 +9,7 @@
 import UIKit
 
 protocol DetailStoryViewModelInputs {
+    func viewDidDisappear()
 }
 
 protocol DetailStoryViewModelOutputs {
@@ -41,4 +42,14 @@ class DetailStoryViewModel: DetailStoryViewModelType, DetailStoryViewModelInputs
         self.coordinator = coordinator
         self.story = story
     }
+    
+    deinit {
+        print("deinit: \(self)")
+    }
+    
+    // MARK: - Inputs Handlers
+    func viewDidDisappear() {
+        coordinator.viewDidDisappear()
+    }
+    
 }

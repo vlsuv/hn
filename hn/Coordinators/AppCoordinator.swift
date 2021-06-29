@@ -33,7 +33,9 @@ class AppCoordinator: Coordinator {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
     }
-    
+}
+
+extension AppCoordinator {
     func childDidFinish(_ childCoordinator: Coordinator) {
         guard let index = childCoordinators.firstIndex(where: { $0 === childCoordinator }) else { return }
         childCoordinators.remove(at: index)

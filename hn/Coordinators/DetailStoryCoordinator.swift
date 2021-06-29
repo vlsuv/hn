@@ -40,4 +40,8 @@ class DetailStoryCoordinator: Coordinator {
         
         navigationController?.pushViewController(detailStoryController, animated: true)
     }
+    
+    func viewDidDisappear() {
+        parentCoordinator?.childDidFinish(self)
+    }
 }
