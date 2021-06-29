@@ -12,9 +12,9 @@ import RxCocoa
 
 protocol StoryListViewModelInputs {
     func didTapShowDetail(at indexPath: IndexPath)
-    func didTapRefreshStories()
     func didTapChangeTheme()
-    func nextData()
+    var refreshTrigger: BehaviorRelay<()> { get }
+    var nextDataTrigger: PublishSubject<()> { get }
 }
 
 protocol StoryListViewModelOutputs {
@@ -40,12 +40,13 @@ class StoryListViewModel: StoryListViewModelProtocol, StoryListViewModelInputs, 
     
     private let disposeBag: DisposeBag
     
-    var stories: BehaviorRelay<[Story]> = .init(value: [Story]())
-    
+    // MARK: Inputs Properties
     var indexEndpoint: BehaviorRelay<Int> = .init(value: 0)
-    
     var refreshTrigger: BehaviorRelay<()> = .init(value: ())
+    var nextDataTrigger: PublishSubject<()> = .init()
     
+    // MARK: - Outputs Properties
+    var stories: BehaviorRelay<[Story]> = .init(value: [Story]())
     var isLoading: BehaviorRelay<Bool> = .init(value: false)
     
     // MARK: - Init
@@ -56,12 +57,14 @@ class StoryListViewModel: StoryListViewModelProtocol, StoryListViewModelInputs, 
         
         self.disposeBag = DisposeBag()
         
-        getData()
+        getDataBindings()
+        nextDataBindings()
     }
     
     // MARK: - Data Manage
-    private func getData() {
-        Observable.combineLatest(indexEndpoint, refreshTrigger)
+    private func getDataBindings() {
+        Observable
+            .combineLatest(indexEndpoint, refreshTrigger)
             .observe(on: MainScheduler.asyncInstance)
             .do(onNext: { _ in self.stories.accept([Story]()) })
             .flatMap { index, _ -> Observable<[Story]> in
@@ -77,16 +80,14 @@ class StoryListViewModel: StoryListViewModelProtocol, StoryListViewModelInputs, 
             .disposed(by: disposeBag)
     }
     
-    func nextData() {
-        storiesNetworkService.nextStories()
-            .observe(on: MainScheduler.asyncInstance)
-            .do(onNext: { _ in
-                self.isLoading.accept(true)
-            })
+    func nextDataBindings() {
+        nextDataTrigger
+            .do(onNext: { self.isLoading.accept(true) })
+            .flatMap { self.storiesNetworkService.nextStories() }
             .subscribe(onNext: { stories in
                 self.stories.accept(self.stories.value + stories)
                 
-                self.isLoading.accept(false)
+                self.isLoading.accept(true)
             })
             .disposed(by: disposeBag)
     }
@@ -100,10 +101,6 @@ class StoryListViewModel: StoryListViewModelProtocol, StoryListViewModelInputs, 
         } else if let stringURL = story.url, let url = URL(string: stringURL) {
             coordinator?.showSafari(with: url)
         }
-    }
-    
-    func didTapRefreshStories() {
-        refreshTrigger.accept(())
     }
     
     func didTapChangeTheme() {

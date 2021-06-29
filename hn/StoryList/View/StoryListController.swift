@@ -49,12 +49,19 @@ class StoryListController: UIViewController {
         let refreshAction = UIBarButtonItem(image: Image.refresh, style: .plain, target: self, action: nil)
         let changeThemeAction = UIBarButtonItem(image: Image.moon, style: .plain, target: self, action: nil)
         
-        refreshAction.rx.tap
+        // When tap on refresh button
+        refreshAction
+            .rx
+            .tap
             .subscribe(onNext: { [weak self] _ in
-                self?.viewModel?.inputs.didTapRefreshStories()
+                self?.viewModel?.inputs.refreshTrigger.accept(())
             })
             .disposed(by: disposeBag)
-        changeThemeAction.rx.tap
+        
+        // When tap on change theme button
+        changeThemeAction
+            .rx
+            .tap
             .subscribe(onNext: { [weak self] _ in self?.viewModel?.inputs.didTapChangeTheme()
             })
             .disposed(by: disposeBag)
@@ -68,7 +75,10 @@ class StoryListController: UIViewController {
     private func configureTableView() {
         tableView.register(UINib(nibName: StoryListCell.identifier, bundle: nil), forCellReuseIdentifier: StoryListCell.identifier)
         
-        viewModel?.outputs.stories
+        // When received data to change tableView
+        viewModel?
+            .outputs
+            .stories
             .do(onNext: { [weak self] stories in
                 if !stories.isEmpty { self?.shouldLoadNextData = true }
             })
@@ -77,7 +87,10 @@ class StoryListController: UIViewController {
         }
         .disposed(by: disposeBag)
         
-        tableView.rx.itemSelected
+        // When tap on cell
+        tableView
+            .rx
+            .itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.viewModel?.inputs.didTapShowDetail(at: indexPath)
                 
@@ -85,6 +98,7 @@ class StoryListController: UIViewController {
             })
             .disposed(by: disposeBag)
         
+        // tableView UI
         tableView.rowHeight = 48
         tableView.tableFooterView = activityIndicator
         tableView.tableFooterView?.frame.size.height = tableView.rowHeight + 10
@@ -93,7 +107,10 @@ class StoryListController: UIViewController {
     }
     
     private func configureSegmentedControl() {
-        segmentedControl.rx.selectedSegmentIndex
+        // When tap segmented control
+        segmentedControl
+            .rx
+            .selectedSegmentIndex
             .bind(to: viewModel!.outputs.indexEndpoint)
             .disposed(by: disposeBag)
         
@@ -105,19 +122,26 @@ class StoryListController: UIViewController {
     }
     
     private func setupInfiniteScroll() {
-        tableView.rx.contentOffset
+        // Observe for contentOffset of tableView
+        tableView
+            .rx
+            .contentOffset
             .map { _ -> Bool in self.tableView.isNearBottomEdge(edgeOffset: 20.0) && self.shouldLoadNextData }
             .subscribe(onNext: { success in
                 if success {
                     self.shouldLoadNextData = false
-                    self.viewModel?.inputs.nextData()
+                    
+                    self.viewModel?.inputs.nextDataTrigger.onNext(())
                 }
             })
             .disposed(by: disposeBag)
     }
     
     private func setupLoadingState() {
-        viewModel?.outputs.isLoading
+        // Observe for loading state
+        viewModel?
+            .outputs
+            .isLoading
             .asDriver()
             .drive(onNext: { isLoading in
                 isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
