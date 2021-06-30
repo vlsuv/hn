@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StoryListController" customModule="hn" customModuleProvider="target">
             <connections>
-                <outlet property="segmentedControl" destination="DEC-S8-nMz" id="dkb-J1-VZZ"/>
+                <outlet property="segmentedControl" destination="Yuq-8G-8N8" id="ItL-7n-c8d"/>
                 <outlet property="tableView" destination="BKX-po-Daq" id="aqL-Ky-Gd1"/>
                 <outlet property="view" destination="gfH-H5-Rza" id="5oN-jA-K40"/>
             </connections>
@@ -20,30 +20,26 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BKX-po-Daq">
-                    <rect key="frame" x="0.0" y="92" width="414" height="804"/>
+                    <rect key="frame" x="0.0" y="94" width="414" height="802"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </tableView>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="DEC-S8-nMz">
-                    <rect key="frame" x="0.0" y="44" width="414" height="49"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yuq-8G-8N8" customClass="CustomSegmentedControl" customModule="hn" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="4Y6-nB-SIT"/>
+                        <constraint firstAttribute="height" constant="50" id="3In-rc-OhQ"/>
                     </constraints>
-                    <segments>
-                        <segment title="Top"/>
-                        <segment title="New"/>
-                        <segment title="Show"/>
-                    </segments>
-                </segmentedControl>
+                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="DEC-S8-nMz" firstAttribute="trailing" secondItem="Fnv-zk-941" secondAttribute="trailing" id="3hT-LH-SQl"/>
+                <constraint firstItem="Yuq-8G-8N8" firstAttribute="trailing" secondItem="Fnv-zk-941" secondAttribute="trailing" id="8dM-Kf-NFm"/>
                 <constraint firstAttribute="bottom" secondItem="BKX-po-Daq" secondAttribute="bottom" id="9UE-mX-neO"/>
-                <constraint firstItem="DEC-S8-nMz" firstAttribute="top" secondItem="Fnv-zk-941" secondAttribute="top" id="LYx-Wc-Uyg"/>
+                <constraint firstItem="Yuq-8G-8N8" firstAttribute="leading" secondItem="Fnv-zk-941" secondAttribute="leading" id="Wcz-i9-e9A"/>
                 <constraint firstItem="BKX-po-Daq" firstAttribute="trailing" secondItem="Fnv-zk-941" secondAttribute="trailing" id="ZFd-f3-eaf"/>
-                <constraint firstItem="BKX-po-Daq" firstAttribute="top" secondItem="DEC-S8-nMz" secondAttribute="bottom" id="ZNx-Zd-lfs"/>
-                <constraint firstItem="DEC-S8-nMz" firstAttribute="leading" secondItem="Fnv-zk-941" secondAttribute="leading" id="hsy-vv-ZPO"/>
+                <constraint firstItem="Yuq-8G-8N8" firstAttribute="top" secondItem="Fnv-zk-941" secondAttribute="top" id="kbt-Gt-XhV"/>
                 <constraint firstItem="BKX-po-Daq" firstAttribute="leading" secondItem="Fnv-zk-941" secondAttribute="leading" id="q0Q-3K-1ox"/>
+                <constraint firstItem="BKX-po-Daq" firstAttribute="top" secondItem="Yuq-8G-8N8" secondAttribute="bottom" id="zcO-j0-Ga2"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Fnv-zk-941"/>
             <point key="canvasLocation" x="137.68115942028987" y="141.96428571428569"/>

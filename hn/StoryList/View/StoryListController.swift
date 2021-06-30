@@ -12,15 +12,14 @@ import RxCocoa
 
 class StoryListController: UIViewController {
     
+    @IBOutlet weak var segmentedControl: CustomSegmentedControl!
     // MARK: - Properties
     var viewModel: StoryListViewModelProtocol?
     
     private var disposeBag: DisposeBag!
     
     @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
+        
     var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
         activityIndicator.color = AssetsColors.text
@@ -106,23 +105,16 @@ class StoryListController: UIViewController {
         tableView.tableFooterView = activityIndicator
         tableView.tableFooterView?.frame.size.height = 48
         tableView.separatorStyle = .singleLine
-//        tableView.separatorInset = UIEdgeInsets(top: 0, left: 18, bottom: 0, right: 18)
-//        tableView.separatorColor = Colors.lightGray
     }
     
     private func configureSegmentedControl() {
+        segmentedControl.setButtonTitles(buttonTitle: ["Top", "New", "Show"])
+        
         // When tap segmented control
         segmentedControl
-            .rx
-            .selectedSegmentIndex
+        .selectedSegmentIndex
             .bind(to: viewModel!.outputs.indexEndpoint)
-            .disposed(by: disposeBag)
-        
-        let normalAttributedString = [
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .light),
-            NSAttributedString.Key.foregroundColor: AssetsColors.text
-        ]
-        segmentedControl.setTitleTextAttributes(normalAttributedString, for: .normal)
+        .disposed(by: disposeBag)
     }
     
     private func setupInfiniteScroll() {
