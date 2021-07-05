@@ -17,6 +17,8 @@ enum Endpoint {
     case topstories
     case newstories
     case showstories
+    case asks
+    case jobs
     case story(Int)
     
     case comment(commentId: Int)
@@ -38,6 +40,12 @@ enum Endpoint {
         case .comment(commentId: let commentId):
             let url = Endpoint.baseURL.appendingPathComponent("item/\(commentId).json")
             return URLRequest(url: url)
+        case .asks:
+            let url = Endpoint.baseURL.appendingPathComponent("askstories.json")
+            return URLRequest(url: url)
+        case .jobs:
+            let url = Endpoint.baseURL.appendingPathComponent("jobstories.json")
+            return URLRequest(url: url)
         }
     }
     
@@ -46,6 +54,8 @@ enum Endpoint {
         case 0: self = .topstories
         case 1: self = .newstories
         case 2: self = .showstories
+        case 3: self = .asks
+        case 4: self = .jobs
         default: return nil
         }
     }

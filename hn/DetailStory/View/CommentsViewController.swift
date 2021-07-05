@@ -21,8 +21,18 @@ class CommentsViewController: UIViewController {
     }()
     
     var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.tableFooterView = UIView()
+        tableView.allowsSelection = false
+        tableView.backgroundColor = AssetsColors.background
         return tableView
+    }()
+    
+    var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .medium)
+        activityIndicator.color = AssetsColors.text
+        activityIndicator.hidesWhenStopped = true
+        return activityIndicator
     }()
     
     var disposeBag: DisposeBag!
@@ -36,7 +46,7 @@ class CommentsViewController: UIViewController {
         
         configureTableView()
         configurePreviewStoryView()
-        
+        setupLoadingState()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -63,9 +73,8 @@ class CommentsViewController: UIViewController {
         }
         .disposed(by: disposeBag)
         
-        tableView.tableHeaderView = previewStoryView
-        tableView.tableHeaderView?.frame.size.height = 150
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = activityIndicator
+        tableView.tableFooterView?.frame.size.height = 48
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -86,14 +95,30 @@ class CommentsViewController: UIViewController {
         })
             .disposed(by: disposeBag)
     }
+    
+    private func setupLoadingState() {
+        viewModel?
+        .outputs
+        .isLoading
+        .asDriver()
+        .drive(onNext: { isLoading in
+            isLoading ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+        })
+        .disposed(by: disposeBag)
+    }
 }
 
 // MARK: - UITableViewDelegate
 extension CommentsViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return previewStoryView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return UITableView.automaticDimension
     }
 }

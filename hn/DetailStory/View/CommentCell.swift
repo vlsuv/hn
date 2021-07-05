@@ -52,7 +52,7 @@ class CommentCell: UITableViewCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
+        backgroundColor = AssetsColors.background
     }
     
     required init?(coder: NSCoder) {

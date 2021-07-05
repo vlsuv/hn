@@ -26,7 +26,7 @@ class StoryListCell: UITableViewCell {
             guard let viewModel = viewModel else { return }
             
             storyTitleLabel.text = viewModel.title
-            urlLabel.text = viewModel.urlHost ?? "open in app"
+            urlLabel.text = viewModel.urlHost
             scoreLabel.text = viewModel.score
             timeLabel.text = viewModel.time
         }

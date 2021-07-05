@@ -21,7 +21,7 @@ class DetailStoryCellViewModel: DetailStoryCellViewModelType {
     private let comment: Comment
     
     var text: String? {
-        guard let text = comment.text, let attributedString = attributedString(withHtmlText: text) else { return nil }
+        guard let text = comment.text, let attributedString = text.getAttributedString() else { return nil }
         
         return attributedString.string
     }
@@ -41,13 +41,5 @@ class DetailStoryCellViewModel: DetailStoryCellViewModelType {
     // MARK: - Init
     init(comment: Comment) {
         self.comment = comment
-    }
-    
-    private func attributedString(withHtmlText htmlText: String) -> NSAttributedString? {
-        let data = Data(htmlText.utf8)
-        
-        guard let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else { return nil }
-        
-        return attributedString
     }
 }

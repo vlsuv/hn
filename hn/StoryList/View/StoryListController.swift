@@ -108,7 +108,7 @@ class StoryListController: UIViewController {
     }
     
     private func configureSegmentedControl() {
-        segmentedControl.setButtonTitles(buttonTitle: ["Top", "New", "Show"])
+        segmentedControl.setButtonTitles(buttonTitle: ["Top", "New", "Show", "Asks", "Jobs"])
         
         // When tap segmented control
         segmentedControl

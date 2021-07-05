@@ -34,12 +34,34 @@ class PreviewStoryView: UIView {
         return label
     }()
     
+    private lazy var topLabelsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [scoreLabel, urlHostLabel])
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        return stackView
+    }()
+    
+    private var scoreLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = Color.mediumGray
+        return label
+    }()
+    
+    private var urlHostLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 14)
+        label.textColor = Color.mediumGray
+        return label
+    }()
+    
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = AssetsColors.background
         
         configureTitleLabel()
+        configureScoreLabel()
         configureAuthorLabel()
         configureTextLabel()
     }
@@ -51,6 +73,8 @@ class PreviewStoryView: UIView {
     func configure(_ viewModel: PreviewStoryViewModelProtocol) {
         titleLabel.text = viewModel.title
         authorLabel.text = "by \(viewModel.author) \(viewModel.time) ago"
+        scoreLabel.text = viewModel.score
+        urlHostLabel.text = viewModel.urlHost
         
         if let text = viewModel.text {
             textLabel.isHidden = false
@@ -67,10 +91,18 @@ class PreviewStoryView: UIView {
         titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -18).isActive = true
     }
     
+    private func configureScoreLabel() {
+        self.addSubview(topLabelsStackView)
+        topLabelsStackView.translatesAutoresizingMaskIntoConstraints = false
+        topLabelsStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        topLabelsStackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 18).isActive = true
+        topLabelsStackView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 18).isActive = true
+    }
+    
     private func configureAuthorLabel() {
         self.addSubview(authorLabel)
         authorLabel.translatesAutoresizingMaskIntoConstraints = false
-        authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8).isActive = true
+        authorLabel.topAnchor.constraint(equalTo: topLabelsStackView.bottomAnchor, constant: 8).isActive = true
         authorLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 18).isActive = true
         authorLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -18).isActive = true
     }

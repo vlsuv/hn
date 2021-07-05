@@ -13,6 +13,8 @@ protocol PreviewStoryViewModelProtocol {
     var author: String { get }
     var text: String? { get }
     var time: String { get }
+    var score: String { get }
+    var urlHost: String? { get }
 }
 
 class PreviewStoryViewModel: PreviewStoryViewModelProtocol {
@@ -29,26 +31,27 @@ class PreviewStoryViewModel: PreviewStoryViewModelProtocol {
     }
     
     var text: String? {
-        guard let text = story.text, let attributedString = attributedString(withHtmlText: text) else { return nil }
+        guard let text = story.text, let attributedString = text.getAttributedString() else { return nil }
         
         return attributedString.string
-        
     }
     
     var time: String {
         return story.time.passedTime()
     }
     
+    var score: String {
+        return "\(story.score) points"
+    }
+    
+    var urlHost: String? {
+        guard let urlString = story.url, let url = URL(string: urlString), let host = url.host else { return nil }
+        
+        return host
+    }
+    
     // MARK: - Init
     init(for story: Story) {
         self.story = story
-    }
-    
-    private func attributedString(withHtmlText htmlText: String) -> NSAttributedString? {
-        let data = Data(htmlText.utf8)
-        
-        guard let attributedString = try? NSAttributedString(data: data, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else { return nil }
-        
-        return attributedString
     }
 }

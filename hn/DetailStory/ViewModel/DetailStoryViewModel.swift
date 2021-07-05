@@ -19,6 +19,7 @@ protocol DetailStoryViewModelOutputs {
     func previewStoryViewModel() -> PreviewStoryViewModelProtocol
     var comments: BehaviorRelay<[Comment]> { get }
     func detailStoryCellViewModel(for item: Comment) -> DetailStoryCellViewModelType
+    var isLoading: BehaviorRelay<Bool> { get }
 }
 
 protocol DetailStoryViewModelType {
@@ -42,6 +43,8 @@ class DetailStoryViewModel: DetailStoryViewModelType, DetailStoryViewModelInputs
     
     var comments: BehaviorRelay<[Comment]> = .init(value: [Comment]())
     
+    var isLoading: BehaviorRelay<Bool> = .init(value: false)
+    
     // MARK: - Init
     init(coordinator: DetailStoryCoordinator, story: Story, storiesNetworkService: StoriesNetworkServiceProtocol) {
         self.coordinator = coordinator
@@ -61,10 +64,18 @@ class DetailStoryViewModel: DetailStoryViewModelType, DetailStoryViewModelInputs
         guard let storiesIDs = story.kids else { return }
         
         storiesNetworkService
-        .comments(ids: storiesIDs)
-        .map { self.prepareCurrentComments($0) }
-        .bind(to: comments)
-        .disposed(by: disposeBag)
+            .comments(ids: storiesIDs)
+            .map({ (comments) -> [Comment] in
+                self.isLoading.accept(true)
+                
+                return self.prepareCurrentComments(comments)
+            })
+            .subscribe(onNext: { comments in
+                self.isLoading.accept(false)
+                
+                self.comments.accept(comments)
+            })
+            .disposed(by: disposeBag)
     }
     
     // MARK: - Outputs Handlers

@@ -10,7 +10,7 @@ import UIKit
 
 protocol StoryListCellViewModelType {
     var title: String { get }
-    var urlHost: String? { get }
+    var urlHost: String { get }
     var score: String { get }
     var time: String { get }
 }
@@ -24,10 +24,10 @@ class StoryListCellViewModel: StoryListCellViewModelType {
         return story.title
     }
     
-    var urlHost: String? {
-        guard let urlString = story.url, let url = URL(string: urlString) else { return nil }
+    var urlHost: String {
+        guard let urlString = story.url, let url = URL(string: urlString) else { return "show detail" }
         
-        return url.host
+        return url.host ?? "show detail"
     }
     
     var score: String {
