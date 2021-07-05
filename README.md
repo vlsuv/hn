@@ -1,18 +1,30 @@
-# hn
-A Hacker News reader iOS app written in Swift.
+# Hacker-News-App
+## Description
+- A hacker news reader for iOS.
+### Video: [Youtube Link](https://youtu.be/IuCv7aw9vEQ)
 
-# Used
-- MVP architecture.
-- Hacker News API.
-- HTTP requests with URLSession.
-- Without the use of storyboards.
-- Support for light and dark mode.
-- Use UserDefaults for saving theme.
-- Unit Tests
+## Features
+- Get top, new, show, asks, jobs stories
+- Show how much time has passed and story's score
+- Story's preview and show comments
+- Share, add to reading list, read in safari
+- Refresh all stories
+- Infinite scroll and get next stories
+- Light/dark theme
+- Dynamically sized UITableViewCell
 
-# Screenshots
-[HackerNews]: screenshots/HackerNews.png
-[FullScreenWeb]: screenshots/FullScreenWeb.png
+## Used
+- Hacker News API
+- MVVM + Coordinators
+- AssemblyBuilder for creating modules
+- RxSwift, RxCocoa
+- Alamofire
+- Without the use of storyboards
+- AutoLayout; Xib
+- UserDefaults
+- SFSafariController
+- UIKit
+- CocoaPods
 
-|![HackerNews][HackerNews]|![FullScreenWeb][FullScreenWeb]|
-|:---:|:---:|
+## Screenshots
+<img src="screenshots/main_light.png" width="257" height="500"> <img src="screenshots/detail_story_light.png" width="257" height="500"> <img src="screenshots/web_light.png" width="257" height="500"> <img src="screenshots/detail_ask_light.png" width="257" height="500"> <img src="screenshots/main_dark.png" width="257" height="500"> <img src="screenshots/detail_story_dark.png" width="257" height="500">
