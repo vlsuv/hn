@@ -33,13 +33,6 @@ class StoryListCoordinator: Coordinator {
         navigationController.viewControllers = [storyListController]
     }
     
-    func showSafari(with url: URL) {
-        let safariCoordinator = SFSafariCoordinator(navigationController: navigationController, url: url)
-        safariCoordinator.start()
-        safariCoordinator.parentCoordinator = self
-        childCoordinators.append(safariCoordinator)
-    }
-    
     func showDetailStory(for story: Story) {
         let detailStoryCoordinator = DetailStoryCoordinator(navigationController: navigationController, story: story)
         detailStoryCoordinator.start()

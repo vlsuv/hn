@@ -19,4 +19,23 @@ struct Story: Decodable {
     let type: String
     let url: String?
     let text: String?
+    
+    enum CustomerKeys: String, CodingKey {
+        case by, descendants, id, kids, score, time, title, type, url, text
+    }
+    
+    init (from decoder: Decoder) throws {
+        let container =  try decoder.container (keyedBy: CustomerKeys.self)
+        
+        by = try container.decode(String.self, forKey: .by)
+        descendants = try? container.decode(Int.self, forKey: .descendants)
+        id = try container.decode(Int.self, forKey: .id)
+        kids = try? container.decode([Int].self, forKey: .kids)
+        score = try container.decode(Int.self, forKey: .score)
+        time = try container.decode(TimeInterval.self, forKey: .time)
+        title = try container.decode(String.self, forKey: .title)
+        type = try container.decode(String.self, forKey: .type)
+        url = try? container.decode(String.self, forKey: .url)
+        text = try? container.decode(String.self, forKey: .text)
+    }
 }

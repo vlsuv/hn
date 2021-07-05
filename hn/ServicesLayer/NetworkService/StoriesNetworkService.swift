@@ -19,6 +19,8 @@ enum Endpoint {
     case showstories
     case story(Int)
     
+    case comment(commentId: Int)
+    
     var request: URLRequest {
         switch self {
         case .topstories:
@@ -32,6 +34,9 @@ enum Endpoint {
             return URLRequest(url: url)
         case .story(let id):
             let url = Endpoint.baseURL.appendingPathComponent("item/\(id).json")
+            return URLRequest(url: url)
+        case .comment(commentId: let commentId):
+            let url = Endpoint.baseURL.appendingPathComponent("item/\(commentId).json")
             return URLRequest(url: url)
         }
     }
@@ -49,6 +54,7 @@ enum Endpoint {
 protocol StoriesNetworkServiceProtocol: NetworkServiceProtocol {
     func stories(from endpoint: Endpoint) -> Observable<[Story]>
     func nextStories() -> Observable<[Story]>
+    func comments(ids: [Int]) -> Observable<[Comment]>
 }
 
 class StoriesNetworkService: StoriesNetworkServiceProtocol {
@@ -57,6 +63,7 @@ class StoriesNetworkService: StoriesNetworkServiceProtocol {
     
     private var loadIDs: [Int] = [Int]()
     
+    // MARK: - Stories
     func stories(from endpoint: Endpoint) -> Observable<[Story]> {
         return storyIDs(from: endpoint)
             .do(onNext: {
@@ -93,5 +100,13 @@ class StoriesNetworkService: StoriesNetworkServiceProtocol {
     
     private func story(id: Int) -> Observable<Story> {
         return fetch(Endpoint.story(id).request)
+    }
+    
+    // MARK: - Comment
+    func comments(ids: [Int]) -> Observable<[Comment]> {
+        return Observable.from(ids)
+            .flatMap { self.fetch(Endpoint.comment(commentId: $0).request) }
+            .toArray()
+            .asObservable()
     }
 }

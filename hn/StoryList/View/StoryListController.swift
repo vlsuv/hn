@@ -95,7 +95,7 @@ class StoryListController: UIViewController {
             .itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 self?.viewModel?.inputs.didTapShowDetail(at: indexPath)
-                
+
                 self?.tableView.deselectRow(at: indexPath, animated: true)
             })
             .disposed(by: disposeBag)

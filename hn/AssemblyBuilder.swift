@@ -26,9 +26,9 @@ class AssemblyBuilder: AssemblyBuilderProtocol {
     }
     
     func createDetailStoryController(coordinator: DetailStoryCoordinator, story: Story) -> UIViewController {
-        let detailStoryViewModel = DetailStoryViewModel(coordinator: coordinator, story: story)
+        let detailStoryViewModel = DetailStoryViewModel(coordinator: coordinator, story: story, storiesNetworkService: StoriesNetworkService())
         
-        let detailStoryController = DetailStoryController()
+        let detailStoryController = CommentsViewController()
         detailStoryController.viewModel = detailStoryViewModel
         
         return detailStoryController

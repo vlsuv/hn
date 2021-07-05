@@ -19,6 +19,7 @@ enum NetworkServiceError: Error {
 
 protocol NetworkServiceProtocol {
     func fetch<T: Decodable>(_ request: URLRequestConvertible) -> Observable<T>
+    func fetch<T: Decodable>(_ request: URLRequestConvertible, completion: ((T) -> ())?)
 }
 
 extension NetworkServiceProtocol {
@@ -49,6 +50,30 @@ extension NetworkServiceProtocol {
             
             return Disposables.create {
                 request.cancel()
+            }
+        }
+    }
+    
+    
+    func fetch<T: Decodable>(_ request: URLRequestConvertible, completion: ((T) -> ())?) {
+        let request = AF.request(request).responseDecodable(of: T.self) { (response) in
+            switch response.result {
+            case .success(let value):
+                completion?(value)
+            case .failure(let error):
+                
+                switch response.response?.statusCode {
+                case 403:
+                    print("error")
+                case 404:
+                    print("error")
+                case 409:
+                    print("error")
+                case 500:
+                    print("error")
+                default:
+                    print("error")
+                }
             }
         }
     }
