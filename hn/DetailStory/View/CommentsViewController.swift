@@ -24,13 +24,13 @@ class CommentsViewController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.tableFooterView = UIView()
         tableView.allowsSelection = false
-        tableView.backgroundColor = AssetsColors.background
+        tableView.backgroundColor = Color.background
         return tableView
     }()
     
     var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
-        activityIndicator.color = AssetsColors.text
+        activityIndicator.color = Color.text
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }()
@@ -42,7 +42,7 @@ class CommentsViewController: UIViewController {
         super.viewDidLoad()
         disposeBag = DisposeBag()
         
-        view.backgroundColor = AssetsColors.background
+        view.backgroundColor = Color.background
         
         configureTableView()
         configurePreviewStoryView()

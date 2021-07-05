@@ -21,7 +21,7 @@ class CommentCell: UITableViewCell {
     private var authorLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 10)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = Color.mediumGray
         return label
     }()
@@ -30,8 +30,8 @@ class CommentCell: UITableViewCell {
         let label = UILabel()
         label.numberOfLines = 0
         label.sizeToFit()
-        label.font = .systemFont(ofSize: 10)
-        label.textColor = AssetsColors.text
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = Color.text
         return label
     }()
     
@@ -52,7 +52,7 @@ class CommentCell: UITableViewCell {
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = AssetsColors.background
+        backgroundColor = Color.background
     }
     
     required init?(coder: NSCoder) {

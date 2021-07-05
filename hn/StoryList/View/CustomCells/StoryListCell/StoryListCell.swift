@@ -44,14 +44,14 @@ class StoryListCell: UITableViewCell {
     // MARK: - Elements Setups
     private func setupStoryTitleLabel() {
         storyTitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        storyTitleLabel.textColor = AssetsColors.text
+        storyTitleLabel.textColor = Color.text
         storyTitleLabel.sizeToFit()
         storyTitleLabel.numberOfLines = 0
     }
     
     private func setupBottomLabels() {
         [urlLabel, scoreLabel, timeLabel].forEach {
-            $0?.font = .systemFont(ofSize: 16, weight: .light)
+            $0?.font = .systemFont(ofSize: 14, weight: .regular)
             $0?.textColor = Color.mediumGray
         }
     }

@@ -22,7 +22,7 @@ class StoryListController: UIViewController {
         
     var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
-        activityIndicator.color = AssetsColors.text
+        activityIndicator.color = Color.text
         activityIndicator.hidesWhenStopped = true
         return activityIndicator
     }()
@@ -32,7 +32,7 @@ class StoryListController: UIViewController {
     // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = AssetsColors.background
+        view.backgroundColor = Color.background
         
         disposeBag = DisposeBag()
         
@@ -67,7 +67,7 @@ class StoryListController: UIViewController {
         
         navigationItem.rightBarButtonItems = [refreshAction, changeThemeAction]
         
-        navigationController?.navigationBar.tintColor = AssetsColors.text
+        navigationController?.navigationBar.tintColor = Color.darkGray
         navigationController?.toTransparent()
     }
     

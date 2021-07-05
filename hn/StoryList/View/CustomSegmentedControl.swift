@@ -17,9 +17,9 @@ class CustomSegmentedControl: UIView {
     private var buttons: [UIButton]!
     private var selectorView: UIView!
     
-    var textColor: UIColor = AssetsColors.text
-    var selectorViewColor: UIColor = Color.mediumGray!
-    var selectorTextColor: UIColor = Color.mediumGray!
+    var textColor: UIColor = Color.darkGray!
+    var selectorViewColor: UIColor = Color.orange
+    var selectorTextColor: UIColor = Color.orange
     
     var selectedSegmentIndex: BehaviorRelay<Int> = .init(value: 0)
     

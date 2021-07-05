@@ -12,9 +12,9 @@ enum Color {
     static let white = UIColor.white
     static let black = UIColor.black
     static let mediumGray = UIColor(named: "MediumGrayColor")
-}
-
-enum AssetsColors {
+    static let darkGray = UIColor(named: "DarkGrayColor")
+    static let orange = UIColor(named: "OrangeColor") ?? UIColor()
+    
     static let text = UIColor(named: "TextColor") ?? UIColor()
     static let background = UIColor(named: "BackgroundColor") ?? UIColor()
 }

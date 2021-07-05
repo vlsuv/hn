@@ -22,13 +22,14 @@ class PreviewStoryView: UIView {
     
     private var authorLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 12)
+        label.textColor = Color.mediumGray
         return label
     }()
     
     private var textLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 14, weight: .regular)
         label.isHidden = true
         label.numberOfLines = 0
         return label
@@ -37,20 +38,20 @@ class PreviewStoryView: UIView {
     private lazy var topLabelsStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [scoreLabel, urlHostLabel])
         stackView.axis = .horizontal
-        stackView.spacing = 8
+        stackView.spacing = 6
         return stackView
     }()
     
     private var scoreLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = Color.mediumGray
         return label
     }()
     
     private var urlHostLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 12)
         label.textColor = Color.mediumGray
         return label
     }()
@@ -58,7 +59,7 @@ class PreviewStoryView: UIView {
     // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = AssetsColors.background
+        backgroundColor = Color.background
         
         configureTitleLabel()
         configureScoreLabel()
@@ -74,7 +75,10 @@ class PreviewStoryView: UIView {
         titleLabel.text = viewModel.title
         authorLabel.text = "by \(viewModel.author) \(viewModel.time) ago"
         scoreLabel.text = viewModel.score
-        urlHostLabel.text = viewModel.urlHost
+        
+        if let urlHost = viewModel.urlHost {
+            urlHostLabel.text = "(\(urlHost))"
+        }
         
         if let text = viewModel.text {
             textLabel.isHidden = false
